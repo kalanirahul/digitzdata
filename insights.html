@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights & Reports | DD Consulting</title>
+  <meta name="description" content="Industry reports and market insights from DD Consulting covering insurance markets across UAE, GCC, MENA, Asia, and global regions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Reports Section */
+    .reports-intro {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      padding-bottom: 48px;
+    }
+
+    .reports-intro p {
+      font-size: 17px;
+      color: var(--gray-600);
+      line-height: 1.75;
+    }
+
+    /* Region Tabs */
+    .region-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .region-tab {
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-600);
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .region-tab:hover {
+      border-color: var(--primary-300);
+      color: var(--primary-600);
+      background: var(--primary-50);
+    }
+
+    .region-tab.active {
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+      border-color: var(--primary-500);
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(224, 122, 122, 0.3);
+    }
+
+    /* Reports Grid */
+    .reports-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .report-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all var(--transition-smooth);
+    }
+
+    .report-card:hover {
+      border-color: var(--gray-300);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .report-thumbnail {
+      height: 160px;
+      background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .report-thumbnail::before {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 100px;
+      background: var(--white);
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .report-thumbnail::after {
+      content: 'PDF';
+      position: absolute;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--white);
+      background: #DC2626;
+      padding: 4px 8px;
+      border-radius: 3px;
+      bottom: 16px;
+      right: 16px;
+    }
+
+    .report-content {
+      padding: 24px;
+    }
+
+    .report-region {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .report-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--gray-900);
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .report-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+
+    .report-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-900);
+      transition: all var(--transition-fast);
+    }
+
+    .report-download:hover {
+      color: var(--blue-700);
+      gap: 12px;
+    }
+
+    .report-download svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Empty State */
+    .reports-empty {
+      text-align: center;
+      padding: 80px 24px;
+      background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+      border-radius: 20px;
+      border: 2px dashed var(--gray-200);
+    }
+
+    .reports-empty-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+    }
+
+    .reports-empty-icon svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--primary-500);
+      stroke-width: 1.5;
+    }
+
+    .reports-empty h3 {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
+
+    .reports-empty p {
+      font-size: 16px;
+      color: var(--gray-500);
+      max-width: 450px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Report Categories */
+    .report-categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    .category-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 36px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-500), var(--teal-500));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .category-card:hover {
+      border-color: var(--gray-300);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .category-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .category-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      transition: all 0.3s ease;
+    }
+
+    .category-icon svg {
+      width: 30px;
+      height: 30px;
+      stroke: var(--primary-600);
+      stroke-width: 1.5;
+    }
+
+    .category-card:hover .category-icon {
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+      transform: scale(1.05);
+    }
+
+    .category-card:hover .category-icon svg {
+      stroke: var(--white);
+    }
+
+    .category-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 6px;
+    }
+
+    .category-count {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    /* CTA Section */
+    .insights-cta {
+      background: linear-gradient(135deg, var(--gray-900) 0%, #1a1a2e 100%);
+      border-radius: 24px;
+      padding: 80px 64px;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .insights-cta::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(224, 122, 122, 0.15) 0%, transparent 70%);
+    }
+
+    .insights-cta::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(90, 122, 138, 0.15) 0%, transparent 70%);
+    }
+
+    .insights-cta h2 {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 400;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .insights-cta p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    .insights-cta .btn {
+      background: var(--white);
+      color: var(--gray-900);
+      position: relative;
+      z-index: 1;
+      padding: 16px 32px;
+      font-size: 15px;
+    }
+
+    .insights-cta .btn:hover {
+      background: var(--primary-50);
+      color: var(--primary-700);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .reports-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .report-categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .reports-grid {
+        grid-template-columns: 1fr;
+      }
+      .report-categories {
+        grid-template-columns: 1fr;
+      }
+      .insights-cta {
+        padding: 48px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="DD Logo.png" alt="DD Consulting" class="logo-img">
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav" id="mainNav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="practices.html" class="nav-link">Practices</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="industries.html" class="nav-link">Industries</a>
+        <a href="insights.html" class="nav-link active">Insights</a>
+        <a href="training.html" class="nav-link">Training</a>
+        <a href="webinars.html" class="nav-link">Events</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="careers.html" class="nav-link">Careers</a>
+        <a href="contact.html" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-header page-header-insights">
+    <div class="container">
+      <p class="page-label">Insights & Reports</p>
+      <h1 class="page-title">Industry reports & market intelligence</h1>
+      <p class="page-description">Access our research publications and market reports covering insurance and financial services across multiple regions.</p>
+    </div>
+  </section>
+
+  <!-- Report Categories -->
+  <section class="section">
+    <div class="container">
+      <div class="reports-intro">
+        <p>Our research team produces regular industry reports analyzing market trends, regulatory developments, and competitive dynamics across the regions we serve.</p>
+      </div>
+
+      <div class="report-categories">
+        <div class="category-card">
+          <div class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <h3 class="category-name">GCC Region</h3>
+          <p class="category-count">UAE, Saudi Arabia, Qatar, Oman</p>
+        </div>
+        <div class="category-card">
+          <div class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <h3 class="category-name">South Asia</h3>
+          <p class="category-count">Pakistan, Nepal, Sri Lanka</p>
+        </div>
+        <div class="category-card">
+          <div class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <h3 class="category-name">Europe</h3>
+          <p class="category-count">Portugal, UK</p>
+        </div>
+        <div class="category-card">
+          <div class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <h3 class="category-name">Asia Pacific</h3>
+          <p class="category-count">Australia</p>
+        </div>
+      </div>
+
+      <!-- Region Filter Tabs -->
+      <div class="region-tabs">
+        <button class="region-tab active" data-region="all">All Regions</button>
+        <button class="region-tab" data-region="gcc">GCC</button>
+        <button class="region-tab" data-region="mena">MENA</button>
+        <button class="region-tab" data-region="asia">South Asia</button>
+        <button class="region-tab" data-region="europe">Europe</button>
+        <button class="region-tab" data-region="apac">Asia Pacific</button>
+      </div>
+
+      <!-- Reports will be displayed here -->
+      <!-- To add reports: Create PDF files and add report cards below -->
+      <div class="reports-empty">
+        <div class="reports-empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="12" y1="18" x2="12" y2="12"/>
+            <line x1="9" y1="15" x2="15" y2="15"/>
+          </svg>
+        </div>
+        <h3>Reports Coming Soon</h3>
+        <p>Our industry reports are being prepared for publication. Check back soon or contact us to request specific market research.</p>
+      </div>
+
+      <!-- Example report cards structure (hidden for now, use as template) -->
+      <!--
+      <div class="reports-grid">
+        <div class="report-card" data-region="gcc">
+          <div class="report-thumbnail"></div>
+          <div class="report-content">
+            <p class="report-region">UAE</p>
+            <h3 class="report-title">UAE Motor Insurance Market Report 2024</h3>
+            <div class="report-meta">
+              <span>Q4 2024</span>
+              <span>PDF, 2.4 MB</span>
+            </div>
+            <a href="reports/uae-motor-2024.pdf" class="report-download" download>
+              Download Report
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      -->
+
+    </div>
+  </section>
+
+  <!-- Request Custom Research -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="insights-cta">
+        <h2>Need custom research?</h2>
+        <p>Our team can produce tailored market analysis and industry reports specific to your business needs and target markets.</p>
+        <a href="contact.html" class="btn btn-lg">Request Custom Research</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="DD Logo.png" alt="DD Consulting" class="footer-logo-img">
+          <p>A global advisory firm delivering solutions across actuarial science, accounting, ESG, and digital transformation.</p>
+          <div class="social-links">
+            <a href="https://ae.linkedin.com/company/dd-consulting-llc" target="_blank" class="social-link" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/consultantsuae/" target="_blank" class="social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Practices</h4>
+          <div class="footer-links">
+            <a href="practices.html" class="footer-link">Actuarial Services</a>
+            <a href="practices.html" class="footer-link">Accounting & Finance</a>
+            <a href="practices.html" class="footer-link">ESG & Sustainability</a>
+            <a href="practices.html" class="footer-link">E-Invoicing</a>
+            <a href="practices.html" class="footer-link">Technology</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Products</h4>
+          <div class="footer-links">
+            <a href="https://www.reserium.io" target="_blank" class="footer-link">Reserium</a>
+            <a href="products.html" class="footer-link">GLM Pricing Tool</a>
+            <a href="products.html" class="footer-link">AI Solutions</a>
+            <a href="products.html" class="footer-link">Motor Pricing Insights</a>
+            <a href="products.html" class="footer-link">Medical Pricing Insights</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <div class="footer-links">
+            <a href="about.html" class="footer-link">About Us</a>
+            <a href="insights.html" class="footer-link">Insights</a>
+            <a href="careers.html" class="footer-link">Careers</a>
+            <a href="contact.html" class="footer-link">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 DD Consulting LLC. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    const navOverlay = document.getElementById('navOverlay');
+    const header = document.getElementById('header');
+
+    function toggleMenu() {
+      menuToggle.classList.toggle('active');
+      mainNav.classList.toggle('active');
+      navOverlay.classList.toggle('active');
+      document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    navOverlay.addEventListener('click', toggleMenu);
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { if (mainNav.classList.contains('active')) toggleMenu(); });
+    });
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
+
+    // Region tabs functionality
+    document.querySelectorAll('.region-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.region-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        // Filter reports by region when reports are added
+      });
+    });
+  </script>
+
+</body>
+</html>

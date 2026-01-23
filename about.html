@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | DD Consulting</title>
+  <meta name="description" content="DD Consulting is a UAE-based consulting firm serving clients across UAE, Oman, Qatar, Saudi Arabia, Pakistan, Nepal, Sri Lanka, Portugal, and Australia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Mission/Vision Cards */
+    .mission-vision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    .mv-card {
+      background: var(--white);
+      padding: 40px;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mv-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-500), var(--teal-500));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .mv-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(224, 122, 122, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      transform: translate(40px, -40px);
+      pointer-events: none;
+    }
+
+    .mv-card:hover {
+      border-color: var(--gray-300);
+      box-shadow: 0 20px 40px rgba(224, 122, 122, 0.1), 0 8px 16px rgba(0, 0, 0, 0.05);
+      transform: translateY(-6px);
+    }
+
+    .mv-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .mv-card-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 100%);
+      border-radius: 14px;
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .mv-card-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--primary-600);
+      stroke-width: 1.5;
+    }
+
+    .mv-card:hover .mv-card-icon {
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+      transform: scale(1.05);
+    }
+
+    .mv-card:hover .mv-card-icon svg {
+      stroke: var(--white);
+    }
+
+    .mv-card-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: linear-gradient(135deg, var(--primary-600) 0%, var(--teal-600) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    .mv-card-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: var(--gray-900);
+    }
+
+    .mv-card-text {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--gray-600);
+    }
+
+    .mv-card.featured {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg,
+        rgba(254, 243, 242, 0.6) 0%,
+        rgba(255, 255, 255, 0.95) 50%,
+        rgba(240, 244, 246, 0.6) 100%);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .mv-card.featured .mv-card-icon {
+      margin-bottom: 0;
+    }
+
+    .mv-card.featured::after {
+      width: 200px;
+      height: 200px;
+    }
+
+    @media (max-width: 640px) {
+      .mv-card.featured {
+        grid-template-columns: 1fr;
+      }
+      .mv-card.featured .mv-card-icon {
+        margin-bottom: 24px;
+      }
+    }
+
+    /* About Intro */
+    .about-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      padding: 60px 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .about-intro > div {
+      position: relative;
+    }
+
+    .about-intro > div::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -20px;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--primary-500) 0%, var(--teal-500) 100%);
+      border-radius: 2px;
+      opacity: 0.3;
+      transition: opacity 0.3s ease;
+    }
+
+    .about-intro > div:hover::before {
+      opacity: 1;
+    }
+
+    .about-intro p {
+      font-size: 17px;
+      color: var(--gray-600);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-intro .section-label {
+      background: linear-gradient(135deg, var(--primary-600) 0%, var(--teal-600) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    /* Values */
+    .values-section {
+      background: linear-gradient(135deg, rgba(254, 243, 242, 0.5) 0%, rgba(255, 255, 255, 0.95) 50%, rgba(240, 244, 246, 0.5) 100%);
+      border-radius: 24px;
+      padding: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .values-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(224, 122, 122, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .values-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .values-header .section-label {
+      background: linear-gradient(135deg, var(--primary-600) 0%, var(--teal-600) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .value-card {
+      display: flex;
+      gap: 24px;
+      padding: 32px;
+      border: 1px solid var(--gray-200);
+      background: var(--white);
+      border-radius: 16px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 0;
+      background: linear-gradient(180deg, var(--primary-500), var(--teal-500));
+      transition: height 0.4s ease;
+    }
+
+    .value-card:hover {
+      border-color: var(--gray-300);
+      box-shadow: 0 16px 40px rgba(224, 122, 122, 0.1);
+      transform: translateX(8px);
+    }
+
+    .value-card:hover::before {
+      height: 100%;
+    }
+
+    .value-icon {
+      width: 56px;
+      height: 56px;
+      min-width: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 100%);
+      border-radius: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .value-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--primary-600);
+      stroke-width: 1.5;
+    }
+
+    .value-card:hover .value-icon {
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+      transform: scale(1.05);
+    }
+
+    .value-card:hover .value-icon svg {
+      stroke: var(--white);
+    }
+
+    .value-content {
+      flex: 1;
+    }
+
+    .value-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+
+    .value-description {
+      font-size: 15px;
+      color: var(--gray-500);
+      line-height: 1.7;
+    }
+
+    /* Global Presence Section */
+    .locations-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .location-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--gray-700);
+      transition: all 0.3s ease;
+    }
+
+    .location-tag:hover {
+      border-color: var(--primary-300);
+      box-shadow: 0 8px 24px rgba(224, 122, 122, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .location-tag-dot {
+      width: 10px;
+      height: 10px;
+      background: linear-gradient(135deg, var(--primary-400) 0%, var(--primary-500) 100%);
+      border-radius: 50%;
+    }
+
+    .location-tag.hq {
+      background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 100%);
+      border-color: var(--primary-200);
+      color: var(--primary-700);
+      font-weight: 600;
+    }
+
+    .location-tag.hq .location-tag-dot {
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+    }
+
+    .location-tag.hq:hover {
+      border-color: var(--primary-400);
+      background: linear-gradient(135deg, var(--primary-100) 0%, var(--primary-200) 100%);
+    }
+
+    /* Team Section */
+    .team-section {
+      padding: 100px 0;
+      background: linear-gradient(180deg, var(--white) 0%, rgba(254, 243, 242, 0.3) 100%);
+    }
+
+    .team-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 48px;
+    }
+
+    .team-header .section-label {
+      background: linear-gradient(135deg, var(--primary-600) 0%, var(--teal-600) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Team Filters */
+    .team-filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .team-filter {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-600);
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .team-filter:hover {
+      border-color: var(--primary-300);
+      color: var(--primary-600);
+    }
+
+    .team-filter.active {
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+      border-color: var(--primary-500);
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(224, 122, 122, 0.25);
+    }
+
+    /* Team Grid */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .team-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-500), var(--teal-500));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .team-card:hover {
+      border-color: var(--gray-300);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      transform: translateY(-6px);
+    }
+
+    .team-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .team-card-avatar {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--primary-600);
+      background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 100%);
+      transition: all 0.3s ease;
+    }
+
+    .team-card:hover .team-card-avatar {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, var(--primary-100) 0%, var(--primary-200) 100%);
+    }
+
+    .team-card-name {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 6px;
+    }
+
+    .team-card-role {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .team-card-dept {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: var(--gray-100);
+      color: var(--gray-600);
+    }
+
+    .team-card-dept.exec { background: linear-gradient(135deg, var(--primary-50), var(--primary-100)); color: var(--primary-700); }
+    .team-card-dept.life { background: linear-gradient(135deg, var(--teal-50), rgba(90, 122, 138, 0.15)); color: var(--teal-700); }
+    .team-card-dept.general { background: linear-gradient(135deg, var(--primary-50), var(--primary-100)); color: var(--primary-700); }
+    .team-card-dept.tech { background: linear-gradient(135deg, var(--teal-50), rgba(90, 122, 138, 0.15)); color: var(--teal-700); }
+    .team-card-dept.finance { background: linear-gradient(135deg, var(--primary-50), var(--primary-100)); color: var(--primary-700); }
+    .team-card-dept.esg { background: linear-gradient(135deg, var(--teal-50), rgba(90, 122, 138, 0.15)); color: var(--teal-700); }
+    .team-card-dept.marketing { background: linear-gradient(135deg, var(--primary-50), var(--primary-100)); color: var(--primary-700); }
+
+    /* Team Card Bio - Shows on hover below the card */
+    .team-card-bio {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 100%);
+      border-left: 3px solid var(--primary-500);
+      color: var(--gray-700);
+      font-size: 13px;
+      line-height: 1.7;
+      border-radius: 0 8px 8px 0;
+      text-align: left;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    .team-card:hover .team-card-bio {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* Custom scrollbar for bio */
+    .team-card-bio::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .team-card-bio::-webkit-scrollbar-track {
+      background: var(--primary-100);
+      border-radius: 2px;
+    }
+
+    .team-card-bio::-webkit-scrollbar-thumb {
+      background: var(--primary-400);
+      border-radius: 2px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Founder Card - Standalone */
+    .founder-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(254, 243, 242, 0.6) 0%, var(--white) 50%, rgba(240, 244, 246, 0.4) 100%);
+      border: 1px solid var(--gray-200);
+      border-radius: 20px;
+      padding: 48px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .founder-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-500), var(--teal-500));
+    }
+
+    .founder-card:hover {
+      box-shadow: 0 20px 50px rgba(224, 122, 122, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .founder-card-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--primary-600);
+      background: linear-gradient(135deg, var(--primary-100) 0%, var(--primary-200) 100%);
+      border: 4px solid var(--white);
+      box-shadow: 0 8px 24px rgba(224, 122, 122, 0.2);
+    }
+
+    .founder-card-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .founder-card-name {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+    }
+
+    .founder-card-role {
+      font-size: 16px;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--primary-600) 0%, var(--teal-600) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    .founder-card-description {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.75;
+      max-width: 600px;
+    }
+
+    @media (max-width: 768px) {
+      .founder-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 32px;
+      }
+      .founder-card-avatar {
+        margin: 0 auto 20px;
+        width: 100px;
+        height: 100px;
+        font-size: 28px;
+      }
+      .founder-card-description {
+        max-width: 100%;
+      }
+    }
+
+    /* Hide team cards by default */
+    .team-card {
+      display: none;
+    }
+
+    /* Show cards when team is expanded */
+    .team-grid.expanded .team-card {
+      display: block;
+    }
+
+    @media (max-width: 1024px) {
+      .team-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-filters { gap: 8px; }
+      .team-filter { padding: 8px 16px; font-size: 13px; }
+    }
+
+    @media (max-width: 480px) {
+      .team-grid { grid-template-columns: 1fr; }
+      .team-card { padding: 24px 20px; }
+    }
+
+    /* Offices Grid */
+    .offices-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 750px;
+      margin: 56px auto 0;
+    }
+
+    .office-card {
+      padding: 40px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .office-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-500), var(--teal-500));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .office-card:hover {
+      border-color: var(--gray-300);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .office-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .office-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      transition: all 0.3s ease;
+    }
+
+    .office-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--primary-600);
+      stroke-width: 1.5;
+    }
+
+    .office-card:hover .office-icon {
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+      transform: scale(1.05);
+    }
+
+    .office-card:hover .office-icon svg {
+      stroke: var(--white);
+    }
+
+    .office-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 10px;
+    }
+
+    .office-address {
+      font-size: 15px;
+      color: var(--gray-500);
+      line-height: 1.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .mission-vision-grid { grid-template-columns: 1fr; }
+      .mv-card.featured { grid-column: span 1; }
+      .about-intro { grid-template-columns: 1fr; }
+      .values-section { padding: 48px 32px; }
+      .values-grid { grid-template-columns: 1fr; }
+      .locations-list { gap: 12px; margin-top: 32px; }
+    }
+
+    @media (max-width: 640px) {
+      .values-section { padding: 32px 24px; }
+      .value-card { flex-direction: column; gap: 16px; }
+      .offices-grid { grid-template-columns: 1fr; }
+      .mv-card { padding: 32px; }
+      .location-tag { padding: 12px 20px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="DD Logo.png" alt="DD Consulting" class="logo-img">
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav" id="mainNav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="practices.html" class="nav-link">Practices</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="industries.html" class="nav-link">Industries</a>
+        <a href="insights.html" class="nav-link">Insights</a>
+        <a href="training.html" class="nav-link">Training</a>
+        <a href="webinars.html" class="nav-link">Events</a>
+        <a href="about.html" class="nav-link active">About Us</a>
+        <a href="careers.html" class="nav-link">Careers</a>
+        <a href="contact.html" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-header page-header-about">
+    <div class="container">
+      <p class="page-label">About Us</p>
+      <h1 class="page-title">Intelligence that transforms</h1>
+      <p class="page-description">DD Consulting is a UAE-based consulting firm serving clients globally. We bring together a team of highly qualified consultants with global experience, delivering innovative, practical, and regulatory-compliant solutions.</p>
+    </div>
+  </section>
+
+  <!-- Mission, Vision, Who We Are -->
+  <section class="section">
+    <div class="container">
+      <div class="mission-vision-grid">
+        <div class="mv-card featured">
+          <div class="mv-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div class="mv-card-content">
+            <p class="mv-card-label">Who We Are</p>
+            <h2 class="mv-card-title">Actuaries, technologists, and strategists united by a purpose</h2>
+            <p class="mv-card-text">DD Consulting is a UAE-headquartered advisory firm with a global footprint spanning the Middle East, Asia, Europe, and Australia. We combine deep technical expertise in actuarial science, accounting, and technology with a hands-on, partnership-driven approach. When we see a gap in the market, we build tools to fill it—like Reserium, our IBNR reserving platform born from years of practical experience.</p>
+          </div>
+        </div>
+        <div class="mv-card">
+          <div class="mv-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <p class="mv-card-label">Our Mission</p>
+          <h2 class="mv-card-title">Partners in your success</h2>
+          <p class="mv-card-text">To deliver world-class advisory services by working alongside our clients as committed collaborators—invested in their growth, not just their projects.</p>
+        </div>
+        <div class="mv-card">
+          <div class="mv-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              <path d="M2 12h20"/>
+            </svg>
+          </div>
+          <p class="mv-card-label">Our Vision</p>
+          <h2 class="mv-card-title">The benchmark for excellence</h2>
+          <p class="mv-card-text">To be recognized globally as the consulting firm that sets the standard for quality, innovation, and client-centric advisory services.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="about-intro">
+        <div>
+          <p class="section-label">Our Story</p>
+          <p>Founded in 2014, DD Consulting emerged from a simple belief: that actuarial excellence and technological innovation should go hand in hand.</p>
+          <p>What started as a boutique actuarial consultancy in the UAE has grown into a multi-disciplinary advisory firm serving clients across the Middle East, Asia, Europe, and Australia.</p>
+          <p>We think smart, not just hard. We leverage sophisticated tools and contemporary methodologies rather than conventional approaches.</p>
+        </div>
+        <div>
+          <p class="section-label">Our Approach</p>
+          <p>We don't just advise—we build. When we see a gap in the market, we create tools to fill it. Our Reserium platform for IBNR reserving is a prime example: born from years of hands-on actuarial work, now serving clients globally.</p>
+          <p>We are everywhere, yet together. Our remote-first operations enable seamless client availability across different time zones.</p>
+          <p>Communication is fundamental. We prioritize accessibility and clarity as central to our value proposition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="values-section">
+        <div class="values-header">
+          <p class="section-label">Our Values</p>
+          <h2 class="section-title">What guides us</h2>
+        </div>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="value-content">
+              <h3 class="value-title">Precision</h3>
+              <p class="value-description">We pursue accuracy and rigor in everything we do, because the details matter.</p>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/></svg>
+            </div>
+            <div class="value-content">
+              <h3 class="value-title">Innovation</h3>
+              <p class="value-description">We build tools that don't exist and find solutions others can't see.</p>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="value-content">
+              <h3 class="value-title">Partnership</h3>
+              <p class="value-description">We succeed when our clients succeed. Their challenges are our challenges.</p>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <div class="value-content">
+              <h3 class="value-title">Integrity</h3>
+              <p class="value-description">We provide independent, unbiased advice—always.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Team -->
+  <section class="team-section">
+    <div class="container">
+      <div class="team-header">
+        <p class="section-label">Our Team</p>
+        <h2 class="section-title">The people behind DD Consulting</h2>
+        <p class="section-description">A diverse team of experts across actuarial science, technology, accounting, and sustainability.</p>
+      </div>
+
+      <!-- Founder Card - Loaded dynamically from Google Sheets -->
+      <div id="founderCard"></div>
+
+      <div class="team-filters">
+        <button class="team-filter" data-filter="all">View All Team</button>
+        <button class="team-filter" data-filter="exec">Leadership</button>
+        <button class="team-filter" data-filter="general">Actuarial - General</button>
+        <button class="team-filter" data-filter="life">Actuarial - Life</button>
+        <button class="team-filter" data-filter="tech">Technology</button>
+        <button class="team-filter" data-filter="finance">Finance</button>
+        <button class="team-filter" data-filter="esg">ESG</button>
+      </div>
+
+      <div class="team-grid" id="teamGrid">
+        <!-- Team members loaded dynamically from Google Sheets -->
+        <div class="team-loading" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+          <p style="color: var(--gray-500);">Loading team members...</p>
+        </div>
+      </div>
+
+      <!-- Fallback: Static team data (used if Google Sheets not configured) -->
+      <template id="fallbackTeamData">
+        <!-- Leadership -->
+        <div class="team-card" data-dept="exec">
+          <div class="team-card-avatar">PG</div>
+          <h3 class="team-card-name">Piyush Goel</h3>
+          <p class="team-card-role">Actuarial Director</p>
+          <span class="team-card-dept exec">Leadership</span>
+        </div>
+        <div class="team-card" data-dept="exec">
+          <div class="team-card-avatar">RA</div>
+          <h3 class="team-card-name">Rameez Ali</h3>
+          <p class="team-card-role">Associate Director</p>
+          <span class="team-card-dept exec">Leadership</span>
+        </div>
+        <div class="team-card" data-dept="exec">
+          <div class="team-card-avatar">MI</div>
+          <h3 class="team-card-name">Mohammad Irfan</h3>
+          <p class="team-card-role">Data Scientist & Actuary</p>
+          <span class="team-card-dept exec">Leadership</span>
+        </div>
+        <div class="team-card" data-dept="exec">
+          <div class="team-card-avatar">KB</div>
+          <h3 class="team-card-name">Kate Bleakley</h3>
+          <p class="team-card-role">Actuary</p>
+          <span class="team-card-dept exec">Leadership</span>
+        </div>
+
+        <!-- Actuarial - General -->
+        <div class="team-card" data-dept="general">
+          <div class="team-card-avatar">HA</div>
+          <h3 class="team-card-name">Hasnain Azhar</h3>
+          <p class="team-card-role">Senior Manager</p>
+          <span class="team-card-dept general">Actuarial - General</span>
+        </div>
+        <div class="team-card" data-dept="general">
+          <div class="team-card-avatar">RK</div>
+          <h3 class="team-card-name">Rahul Kalani</h3>
+          <p class="team-card-role">Manager</p>
+          <span class="team-card-dept general">Actuarial - General</span>
+        </div>
+        <div class="team-card" data-dept="general">
+          <div class="team-card-avatar">UK</div>
+          <h3 class="team-card-name">Uzair Khurshid</h3>
+          <p class="team-card-role">Senior Actuarial Analyst</p>
+          <span class="team-card-dept general">Actuarial - General</span>
+        </div>
+        <div class="team-card" data-dept="general">
+          <div class="team-card-avatar">MM</div>
+          <h3 class="team-card-name">Muhammad Maaz</h3>
+          <p class="team-card-role">Actuarial Analyst</p>
+          <span class="team-card-dept general">Actuarial - General</span>
+        </div>
+        <div class="team-card" data-dept="general">
+          <div class="team-card-avatar">HS</div>
+          <h3 class="team-card-name">Hamza Saud</h3>
+          <p class="team-card-role">Actuarial Analyst</p>
+          <span class="team-card-dept general">Actuarial - General</span>
+        </div>
+        <div class="team-card" data-dept="general">
+          <div class="team-card-avatar">SH</div>
+          <h3 class="team-card-name">Shadab Haider</h3>
+          <p class="team-card-role">Actuarial Analyst</p>
+          <span class="team-card-dept general">Actuarial - General</span>
+        </div>
+
+        <!-- Actuarial - Life -->
+        <div class="team-card" data-dept="life">
+          <div class="team-card-avatar">SK</div>
+          <h3 class="team-card-name">Salman Khawja</h3>
+          <p class="team-card-role">Consulting Actuary</p>
+          <span class="team-card-dept life">Actuarial - Life</span>
+        </div>
+        <div class="team-card" data-dept="life">
+          <div class="team-card-avatar">AM</div>
+          <h3 class="team-card-name">Azim Mamdani</h3>
+          <p class="team-card-role">Deputy Manager</p>
+          <span class="team-card-dept life">Actuarial - Life</span>
+        </div>
+        <div class="team-card" data-dept="life">
+          <div class="team-card-avatar">AH</div>
+          <h3 class="team-card-name">Aun Haider</h3>
+          <p class="team-card-role">Deputy Manager</p>
+          <span class="team-card-dept life">Actuarial - Life</span>
+        </div>
+        <div class="team-card" data-dept="life">
+          <div class="team-card-avatar">SS</div>
+          <h3 class="team-card-name">Saad Shakeel</h3>
+          <p class="team-card-role">Actuarial Analyst</p>
+          <span class="team-card-dept life">Actuarial - Life</span>
+        </div>
+        <div class="team-card" data-dept="life">
+          <div class="team-card-avatar">SA</div>
+          <h3 class="team-card-name">Salman Amir</h3>
+          <p class="team-card-role">Actuarial Analyst</p>
+          <span class="team-card-dept life">Actuarial - Life</span>
+        </div>
+        <div class="team-card" data-dept="life">
+          <div class="team-card-avatar">MR</div>
+          <h3 class="team-card-name">Mohammed Rizwan</h3>
+          <p class="team-card-role">Actuarial Analyst</p>
+          <span class="team-card-dept life">Actuarial - Life</span>
+        </div>
+
+        <!-- Technology -->
+        <div class="team-card" data-dept="tech">
+          <div class="team-card-avatar">IB</div>
+          <h3 class="team-card-name">Irfan Baig</h3>
+          <p class="team-card-role">IT Security</p>
+          <span class="team-card-dept tech">Technology</span>
+        </div>
+        <div class="team-card" data-dept="tech">
+          <div class="team-card-avatar">MA</div>
+          <h3 class="team-card-name">Muhammed Ahmed</h3>
+          <p class="team-card-role">IT Security</p>
+          <span class="team-card-dept tech">Technology</span>
+        </div>
+
+        <!-- Finance -->
+        <div class="team-card" data-dept="finance">
+          <div class="team-card-avatar">M</div>
+          <h3 class="team-card-name">Mansoob</h3>
+          <p class="team-card-role">Finance Manager</p>
+          <span class="team-card-dept finance">Finance</span>
+        </div>
+        <div class="team-card" data-dept="finance">
+          <div class="team-card-avatar">DF</div>
+          <h3 class="team-card-name">Dilshad Feroz</h3>
+          <p class="team-card-role">Accounting & Tax Consultant</p>
+          <span class="team-card-dept finance">Finance</span>
+        </div>
+        <div class="team-card" data-dept="finance">
+          <div class="team-card-avatar">FM</div>
+          <h3 class="team-card-name">Faheem Malik</h3>
+          <p class="team-card-role">Investment Analyst</p>
+          <span class="team-card-dept finance">Finance</span>
+        </div>
+
+        <!-- ESG -->
+        <div class="team-card" data-dept="esg">
+          <div class="team-card-avatar">JB</div>
+          <h3 class="team-card-name">Jayesh Bhana</h3>
+          <p class="team-card-role">Sustainability Consultant</p>
+          <span class="team-card-dept esg">ESG</span>
+        </div>
+
+        <!-- Marketing -->
+        <div class="team-card" data-dept="marketing">
+          <div class="team-card-avatar">RA</div>
+          <h3 class="team-card-name">Rahim Aziz</h3>
+          <p class="team-card-role">Regional Marketing Manager</p>
+          <span class="team-card-dept marketing">Marketing</span>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <!-- Global Presence with Map -->
+  <section class="section section-alt world-map-section">
+    <div class="container">
+      <div class="section-header" style="text-align: center;">
+        <p class="section-label">Global Presence</p>
+        <h2 class="section-title">Serving clients worldwide</h2>
+        <p class="section-description" style="margin: 0 auto;">From our headquarters in the UAE, we serve clients across the Middle East, Asia, Europe, and Australia.</p>
+      </div>
+
+      <div class="locations-list">
+        <span class="location-tag hq"><span class="location-tag-dot"></span>UAE (HQ)</span>
+        <span class="location-tag"><span class="location-tag-dot"></span>Oman</span>
+        <span class="location-tag"><span class="location-tag-dot"></span>Qatar</span>
+        <span class="location-tag"><span class="location-tag-dot"></span>Saudi Arabia</span>
+        <span class="location-tag"><span class="location-tag-dot"></span>Pakistan</span>
+        <span class="location-tag"><span class="location-tag-dot"></span>Nepal</span>
+        <span class="location-tag"><span class="location-tag-dot"></span>Sri Lanka</span>
+        <span class="location-tag"><span class="location-tag-dot"></span>Portugal</span>
+        <span class="location-tag"><span class="location-tag-dot"></span>Australia</span>
+      </div>
+
+      <div class="offices-grid">
+        <div class="office-card">
+          <div class="office-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 21h18M5 21V7l8-4v18M13 21V3l6 3v15M9 9v.01M9 13v.01M9 17v.01"/>
+            </svg>
+          </div>
+          <h3 class="office-name">Dubai</h3>
+          <p class="office-address">Office 21, Al Gharhoud Views Building<br>6th Floor, Dubai, UAE</p>
+        </div>
+        <div class="office-card">
+          <div class="office-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 21h18M5 21V7l8-4v18M13 21V3l6 3v15M9 9v.01M9 13v.01M9 17v.01"/>
+            </svg>
+          </div>
+          <h3 class="office-name">Sharjah</h3>
+          <p class="office-address">Office C282, Level 2, Block C<br>Shams Business Center<br>Sharjah Media City Freezone</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Join our team</h2>
+      <p class="section-description" style="margin: 16px auto 32px;">We're always looking for talented people who share our passion for solving complex problems.</p>
+      <a href="careers.html" class="btn btn-primary">Explore Careers</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="DD Logo.png" alt="DD Consulting" class="footer-logo-img">
+          <p>A global advisory firm delivering solutions across actuarial science, accounting, ESG, and digital transformation.</p>
+          <div class="social-links">
+            <a href="https://ae.linkedin.com/company/dd-consulting-llc" target="_blank" class="social-link" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/consultantsuae/" target="_blank" class="social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Practices</h4>
+          <div class="footer-links">
+            <a href="practices.html" class="footer-link">Actuarial Services</a>
+            <a href="practices.html" class="footer-link">Accounting & Finance</a>
+            <a href="practices.html" class="footer-link">ESG & Sustainability</a>
+            <a href="practices.html" class="footer-link">E-Invoicing</a>
+            <a href="practices.html" class="footer-link">Technology</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Products</h4>
+          <div class="footer-links">
+            <a href="https://www.reserium.io" target="_blank" class="footer-link">Reserium</a>
+            <a href="products.html" class="footer-link">GLM Pricing Tool</a>
+            <a href="products.html" class="footer-link">AI Solutions</a>
+            <a href="products.html" class="footer-link">Motor Pricing Insights</a>
+            <a href="products.html" class="footer-link">Medical Pricing Insights</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <div class="footer-links">
+            <a href="about.html" class="footer-link">About Us</a>
+            <a href="insights.html" class="footer-link">Insights</a>
+            <a href="careers.html" class="footer-link">Careers</a>
+            <a href="contact.html" class="footer-link">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 DD Consulting LLC. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data-loader.js"></script>
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    const navOverlay = document.getElementById('navOverlay');
+    const header = document.getElementById('header');
+
+    function toggleMenu() {
+      menuToggle.classList.toggle('active');
+      mainNav.classList.toggle('active');
+      navOverlay.classList.toggle('active');
+      document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    navOverlay.addEventListener('click', toggleMenu);
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { if (mainNav.classList.contains('active')) toggleMenu(); });
+    });
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
+
+    // Team data and rendering
+    let allTeamMembers = [];
+    const teamGrid = document.getElementById('teamGrid');
+
+    // Load team from Google Sheets or fallback
+    document.addEventListener('DOMContentLoaded', async () => {
+      console.log('DataLoader available:', typeof DataLoader !== 'undefined');
+      console.log('DataLoader configured:', typeof DataLoader !== 'undefined' ? DataLoader.isConfigured() : 'N/A');
+
+      try {
+        if (typeof DataLoader !== 'undefined' && DataLoader.isConfigured()) {
+          console.log('Loading team from Google Sheets...');
+          allTeamMembers = await DataLoader.loadTeam();
+          console.log('Loaded team members:', allTeamMembers);
+          renderTeam(allTeamMembers);
+        } else {
+          console.log('Using fallback team data');
+          // Use fallback static data
+          loadFallbackTeam();
+        }
+      } catch (error) {
+        console.error('Failed to load team:', error);
+        loadFallbackTeam();
+      }
+
+      // Initialize filters after team is loaded
+      initTeamFilters();
+    });
+
+    function loadFallbackTeam() {
+      const fallbackTemplate = document.getElementById('fallbackTeamData');
+      if (fallbackTemplate) {
+        teamGrid.innerHTML = fallbackTemplate.innerHTML;
+        teamGrid.classList.add('expanded');
+      }
+    }
+
+    function renderTeam(members) {
+      if (!members || members.length === 0) {
+        loadFallbackTeam();
+        return;
+      }
+
+      // Find the founder (CEO & Founder or similar role)
+      const founder = members.find(m =>
+        m.role && (m.role.toLowerCase().includes('ceo') || m.role.toLowerCase().includes('founder'))
+      );
+
+      // Render founder card
+      if (founder) {
+        renderFounder(founder);
+      }
+
+      // Filter out founder from regular team grid
+      const teamMembers = founder
+        ? members.filter(m => m !== founder)
+        : members;
+
+      const deptLabels = {
+        'exec': 'Leadership',
+        'general': 'Actuarial - General',
+        'life': 'Actuarial - Life',
+        'tech': 'Technology',
+        'finance': 'Finance',
+        'esg': 'ESG',
+        'marketing': 'Marketing'
+      };
+
+      teamGrid.innerHTML = teamMembers.map(member => {
+        const initials = getInitials(member.name);
+        const dept = member.department || 'exec';
+        const deptLabel = deptLabels[dept] || dept;
+        const bio = member.bio ? member.bio.trim() : '';
+        const hasBio = bio.length > 5; // Must have meaningful content
+
+        return `
+          <div class="team-card" data-dept="${dept}">
+            ${member.photo
+              ? `<img src="${member.photo}" alt="${member.name}" class="team-card-avatar" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">`
+              : `<div class="team-card-avatar">${initials}</div>`
+            }
+            <h3 class="team-card-name">${member.name}</h3>
+            <p class="team-card-role">${member.role}</p>
+            <span class="team-card-dept ${dept}">${deptLabel}</span>
+            ${hasBio ? `<div class="team-card-bio">${bio}</div>` : ''}
+          </div>
+        `;
+      }).join('');
+
+      // Don't expand by default - wait for filter click
+    }
+
+    function renderFounder(founder) {
+      const founderCard = document.getElementById('founderCard');
+      const initials = getInitials(founder.name);
+      const bio = founder.bio ? founder.bio.trim() : '';
+
+      founderCard.innerHTML = `
+        <div class="founder-card">
+          ${founder.photo
+            ? `<img src="${founder.photo}" alt="${founder.name}" class="founder-card-avatar" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;">`
+            : `<div class="founder-card-avatar">${initials}</div>`
+          }
+          <div class="founder-card-info">
+            <h3 class="founder-card-name">${founder.name}</h3>
+            <p class="founder-card-role">${founder.role}</p>
+            ${bio ? `<p class="founder-card-description">${bio}</p>` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    function getInitials(name) {
+      if (!name) return '?';
+      return name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    }
+
+    function initTeamFilters() {
+      const teamFilters = document.querySelectorAll('.team-filter');
+
+      teamFilters.forEach(filter => {
+        filter.addEventListener('click', () => {
+          const filterValue = filter.dataset.filter;
+          const teamCards = document.querySelectorAll('.team-card');
+          const isAlreadyActive = filter.classList.contains('active');
+
+          // If clicking the same active filter, collapse/hide
+          if (isAlreadyActive) {
+            filter.classList.remove('active');
+            teamGrid.classList.remove('expanded');
+            teamCards.forEach(card => card.style.display = 'none');
+            return;
+          }
+
+          // Update active state
+          teamFilters.forEach(f => f.classList.remove('active'));
+          filter.classList.add('active');
+
+          // Expand the grid to show cards
+          teamGrid.classList.add('expanded');
+
+          // Filter cards
+          teamCards.forEach(card => {
+            if (filterValue === 'all' || card.dataset.dept === filterValue) {
+              card.style.display = 'block';
+              card.style.animation = 'fadeInUp 0.4s ease forwards';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
