@@ -178,7 +178,6 @@ const DataLoader = (function() {
 
     // Return cached data if valid
     if (isCacheValid(cacheKey)) {
-      console.log(`[DataLoader] Using cached data for ${sheetName}`);
       return cache[cacheKey].data;
     }
 
@@ -190,7 +189,6 @@ const DataLoader = (function() {
 
       // Use CORS proxy for local development
       const url = USE_CORS_PROXY ? CORS_PROXY + encodeURIComponent(baseUrl) : baseUrl;
-      console.log(`[DataLoader] Fetching ${sheetName} (cache bust: ${cacheBuster})`);
 
       const response = await fetch(url);
 
@@ -199,10 +197,7 @@ const DataLoader = (function() {
       }
 
       const csvText = await response.text();
-      console.log(`[DataLoader] Raw CSV for ${sheetName} (first 200 chars):`, csvText.substring(0, 200));
-
       const data = parseCSV(csvText);
-      console.log(`[DataLoader] Parsed ${sheetName}: ${data.length} rows`, data);
 
       // Cache the data
       cache[cacheKey] = {
@@ -213,16 +208,12 @@ const DataLoader = (function() {
       return data;
 
     } catch (error) {
-      console.error(`[DataLoader] Error fetching ${sheetName}:`, error);
-
       // Return cached data even if expired, as fallback
       if (cache[cacheKey]) {
-        console.log(`[DataLoader] Using expired cache for ${sheetName}`);
         return cache[cacheKey].data;
       }
 
       // Return demo data for development
-      console.log(`[DataLoader] Using demo data for ${sheetName}`);
       return getDemoData(sheetName);
     }
   }
