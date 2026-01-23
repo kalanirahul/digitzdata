@@ -409,9 +409,7 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   margin-bottom: var(--space-4);
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
+  display: inline-block;
   position: relative;
   animation: fadeInDown 0.6s ease-out both;
 }
@@ -422,6 +420,10 @@ img {
   height: 3px;
   background: linear-gradient(90deg, var(--primary-500), var(--teal-500));
   border-radius: 2px;
+  position: absolute;
+  left: -52px;
+  top: 50%;
+  transform: translateY(-50%);
   animation: slideInFromLeft 0.8s ease-out 0.2s both;
 }
 
