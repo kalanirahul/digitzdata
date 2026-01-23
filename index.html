@@ -216,15 +216,120 @@
   </section>
 
   <!-- Industries Section -->
+  <style>
+    .industries-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .industries-content {
+      order: 1;
+    }
+    .industries-presence {
+      order: 2;
+      background: var(--gray-50);
+      padding: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--gray-200);
+      position: relative;
+      overflow: hidden;
+    }
+    .industries-presence-corner {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-100) 0%, transparent 60%);
+      border-radius: 0 12px 0 100%;
+    }
+    .industries-presence-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary-500);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+    }
+    .industries-presence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .industries-presence-item {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--white);
+      border-radius: 8px;
+      border-left: 3px solid var(--primary-500);
+      transition: all 0.3s ease;
+    }
+    .industries-presence-item.alt {
+      border-left-color: var(--teal-500);
+    }
+    .industries-presence-region {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary-600);
+      min-width: 80px;
+    }
+    .industries-presence-countries {
+      font-size: 15px;
+      color: var(--gray-600);
+    }
+    .industries-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 968px) {
+      .industries-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .industries-content {
+        order: 1;
+        text-align: center;
+      }
+      .industries-content .accent-line {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .industries-tags {
+        justify-content: center;
+      }
+      .industries-content .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .industries-presence {
+        order: 2;
+        padding: 32px 24px;
+      }
+    }
+    @media (max-width: 480px) {
+      .industries-presence-item {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .industries-presence-region {
+        min-width: auto;
+      }
+    }
+  </style>
   <section class="section">
     <div class="container">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
-        <div class="animate-fade-left">
+      <div class="industries-grid">
+        <div class="industries-content animate-fade-left">
           <div class="accent-line"></div>
           <p class="section-label">Industries We Serve</p>
           <h2 class="section-title">Deep sector expertise across financial services</h2>
           <p class="section-description" style="margin-bottom: 32px;">We bring specialized knowledge to insurance, reinsurance, banking, corporate, government, and healthcare sectors.</p>
-          <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
+          <div class="industries-tags">
             <span class="tag">Insurance</span>
             <span class="tag">Reinsurance</span>
             <span class="tag">Banking</span>
@@ -237,27 +342,25 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
-        <div class="animate-fade-right" style="background: var(--gray-50); padding: 40px; border-radius: 12px; border: 1px solid var(--gray-200); position: relative; overflow: hidden;">
-          <!-- Animated accent corner -->
-          <div style="position: absolute; top: 0; right: 0; width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-100) 0%, transparent 60%); border-radius: 0 12px 0 100%;"></div>
-
-          <p style="font-size: 12px; font-weight: 600; color: var(--primary-500); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 24px;">Global Presence</p>
-          <div class="stagger-list" style="display: flex; flex-direction: column; gap: 20px;">
-            <div style="display: flex; align-items: baseline; gap: 12px; padding: 12px 16px; background: var(--white); border-radius: 8px; border-left: 3px solid var(--primary-500); transition: all 0.3s ease;">
-              <span style="font-size: 14px; font-weight: 600; color: var(--primary-600); min-width: 80px;">GCC</span>
-              <span style="font-size: 15px; color: var(--gray-600);">UAE &middot; KSA &middot; Qatar &middot; Oman</span>
+        <div class="industries-presence animate-fade-right">
+          <div class="industries-presence-corner"></div>
+          <p class="industries-presence-title">Global Presence</p>
+          <div class="industries-presence-list stagger-list">
+            <div class="industries-presence-item">
+              <span class="industries-presence-region">GCC</span>
+              <span class="industries-presence-countries">UAE &middot; KSA &middot; Qatar &middot; Oman</span>
             </div>
-            <div style="display: flex; align-items: baseline; gap: 12px; padding: 12px 16px; background: var(--white); border-radius: 8px; border-left: 3px solid var(--teal-500); transition: all 0.3s ease;">
-              <span style="font-size: 14px; font-weight: 600; color: var(--primary-600); min-width: 80px;">South Asia</span>
-              <span style="font-size: 15px; color: var(--gray-600);">Pakistan &middot; Nepal &middot; Sri Lanka</span>
+            <div class="industries-presence-item alt">
+              <span class="industries-presence-region">South Asia</span>
+              <span class="industries-presence-countries">Pakistan &middot; Nepal &middot; Sri Lanka</span>
             </div>
-            <div style="display: flex; align-items: baseline; gap: 12px; padding: 12px 16px; background: var(--white); border-radius: 8px; border-left: 3px solid var(--primary-500); transition: all 0.3s ease;">
-              <span style="font-size: 14px; font-weight: 600; color: var(--primary-600); min-width: 80px;">Europe</span>
-              <span style="font-size: 15px; color: var(--gray-600);">Portugal &middot; UK</span>
+            <div class="industries-presence-item">
+              <span class="industries-presence-region">Europe</span>
+              <span class="industries-presence-countries">Portugal &middot; UK</span>
             </div>
-            <div style="display: flex; align-items: baseline; gap: 12px; padding: 12px 16px; background: var(--white); border-radius: 8px; border-left: 3px solid var(--teal-500); transition: all 0.3s ease;">
-              <span style="font-size: 14px; font-weight: 600; color: var(--primary-600); min-width: 80px;">APAC</span>
-              <span style="font-size: 15px; color: var(--gray-600);">Australia</span>
+            <div class="industries-presence-item alt">
+              <span class="industries-presence-region">APAC</span>
+              <span class="industries-presence-countries">Australia</span>
             </div>
           </div>
         </div>
