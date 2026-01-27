@@ -129,49 +129,698 @@
   <!-- Practices Section -->
   <style>
     .practices-section {
-      background: linear-gradient(180deg,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(248, 250, 252, 0.5) 50%,
-        rgba(255, 255, 255, 1) 100%);
+      background: #f8fafc;
       position: relative;
       overflow: hidden;
+      padding: 80px 0;
     }
-    .practices-section::before {
+    /* Animated gradient background - MORE VISIBLE */
+    .practices-animated-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(135deg,
+        rgba(224, 122, 122, 0.15) 0%,
+        rgba(248, 250, 252, 1) 20%,
+        rgba(45, 212, 191, 0.1) 40%,
+        rgba(248, 250, 252, 1) 60%,
+        rgba(224, 122, 122, 0.12) 80%,
+        rgba(248, 250, 252, 1) 100%);
+      background-size: 300% 300%;
+      animation: practicesGradientShift 8s ease infinite;
+    }
+    @keyframes practicesGradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    /* Animated mesh grid - VISIBLE */
+    .practices-mesh {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-image:
+        linear-gradient(rgba(224, 122, 122, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(224, 122, 122, 0.08) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: practicesMeshMove 20s linear infinite;
+    }
+    @keyframes practicesMeshMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(60px, 60px); }
+    }
+    /* Large floating blobs - VERY VISIBLE */
+    .practices-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      z-index: 1;
+      animation: practicesBlobFloat 10s ease-in-out infinite;
+    }
+    .practices-blob-1 {
+      width: 500px;
+      height: 500px;
+      background: rgba(224, 122, 122, 0.25);
+      top: -150px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+    .practices-blob-2 {
+      width: 400px;
+      height: 400px;
+      background: rgba(45, 212, 191, 0.2);
+      bottom: -100px;
+      right: -80px;
+      animation-delay: -3s;
+      animation-duration: 12s;
+    }
+    .practices-blob-3 {
+      width: 350px;
+      height: 350px;
+      background: rgba(224, 122, 122, 0.18);
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-delay: -5s;
+      animation-duration: 14s;
+    }
+    @keyframes practicesBlobFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -20px) scale(1.05); }
+      50% { transform: translate(-20px, 30px) scale(0.95); }
+      75% { transform: translate(20px, 20px) scale(1.02); }
+    }
+    /* Flowing wave lines - MORE VISIBLE */
+    .practices-waves {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .practices-wave {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background: transparent;
+      border-radius: 43%;
+    }
+    .practices-wave-1 {
+      border: 3px solid rgba(224, 122, 122, 0.15);
+      animation: practicesWaveRotate 20s linear infinite;
+    }
+    .practices-wave-2 {
+      border: 2px solid rgba(45, 212, 191, 0.12);
+      animation: practicesWaveRotate 25s linear infinite reverse;
+      width: 180%;
+      height: 180%;
+      top: -40%;
+      left: -40%;
+    }
+    .practices-wave-3 {
+      border: 2px solid rgba(224, 122, 122, 0.1);
+      animation: practicesWaveRotate 30s linear infinite;
+      width: 160%;
+      height: 160%;
+      top: -30%;
+      left: -30%;
+    }
+    @keyframes practicesWaveRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    /* Light streaks - BRIGHTER */
+    .practices-streaks {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .practices-streak {
+      position: absolute;
+      width: 3px;
+      background: linear-gradient(180deg, transparent 0%, rgba(224, 122, 122, 0.6) 50%, transparent 100%);
+      animation: practicesStreakFall 6s linear infinite;
+      border-radius: 2px;
+    }
+    .practices-streak:nth-child(1) { left: 8%; animation-delay: 0s; height: 150px; }
+    .practices-streak:nth-child(2) { left: 22%; animation-delay: -1.5s; height: 200px; }
+    .practices-streak:nth-child(3) { left: 38%; animation-delay: -3s; height: 120px; }
+    .practices-streak:nth-child(4) { left: 52%; animation-delay: -0.8s; height: 180px; }
+    .practices-streak:nth-child(5) { left: 68%; animation-delay: -4s; height: 160px; }
+    .practices-streak:nth-child(6) { left: 82%; animation-delay: -2.5s; height: 140px; }
+    .practices-streak:nth-child(7) { left: 15%; animation-delay: -5s; height: 130px; width: 2px; background: linear-gradient(180deg, transparent 0%, rgba(45, 212, 191, 0.5) 50%, transparent 100%); }
+    .practices-streak:nth-child(8) { left: 75%; animation-delay: -3.5s; height: 190px; width: 2px; background: linear-gradient(180deg, transparent 0%, rgba(45, 212, 191, 0.4) 50%, transparent 100%); }
+    @keyframes practicesStreakFall {
+      0% { top: -250px; opacity: 0; }
+      5% { opacity: 1; }
+      95% { opacity: 1; }
+      100% { top: 110%; opacity: 0; }
+    }
+    /* Glowing pulse circles - LARGER & BRIGHTER */
+    .practices-pulses {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .practices-pulse {
+      position: absolute;
+      border-radius: 50%;
+      animation: practicesPulse 5s ease-in-out infinite;
+    }
+    .practices-pulse:nth-child(1) { width: 400px; height: 400px; top: 5%; left: 0%; background: radial-gradient(circle, rgba(224, 122, 122, 0.3) 0%, transparent 60%); animation-delay: 0s; }
+    .practices-pulse:nth-child(2) { width: 350px; height: 350px; bottom: 10%; right: 5%; background: radial-gradient(circle, rgba(45, 212, 191, 0.25) 0%, transparent 60%); animation-delay: -1.5s; }
+    .practices-pulse:nth-child(3) { width: 300px; height: 300px; top: 45%; left: 35%; background: radial-gradient(circle, rgba(224, 122, 122, 0.2) 0%, transparent 60%); animation-delay: -3s; }
+    @keyframes practicesPulse {
+      0%, 100% { transform: scale(0.9); opacity: 0.5; }
+      50% { transform: scale(1.3); opacity: 1; }
+    }
+    /* Floating particles - LARGER & MORE VISIBLE */
+    .practices-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 3;
+    }
+    .practices-particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: particleFloat 8s ease-in-out infinite;
+    }
+    /* Coral particles - BIGGER */
+    .practices-particle:nth-child(1) { width: 12px; height: 12px; background: rgba(224, 122, 122, 0.6); left: 8%; top: 20%; animation-delay: 0s; animation-duration: 10s; box-shadow: 0 0 20px rgba(224, 122, 122, 0.4); }
+    .practices-particle:nth-child(2) { width: 16px; height: 16px; background: rgba(224, 122, 122, 0.5); left: 18%; top: 55%; animation-delay: -2s; animation-duration: 12s; box-shadow: 0 0 25px rgba(224, 122, 122, 0.3); }
+    .practices-particle:nth-child(3) { width: 8px; height: 8px; background: rgba(224, 122, 122, 0.7); left: 32%; top: 35%; animation-delay: -4s; animation-duration: 9s; box-shadow: 0 0 15px rgba(224, 122, 122, 0.5); }
+    .practices-particle:nth-child(4) { width: 14px; height: 14px; background: rgba(224, 122, 122, 0.55); left: 48%; top: 70%; animation-delay: -1s; animation-duration: 11s; box-shadow: 0 0 22px rgba(224, 122, 122, 0.35); }
+    .practices-particle:nth-child(5) { width: 10px; height: 10px; background: rgba(224, 122, 122, 0.65); left: 62%; top: 22%; animation-delay: -3s; animation-duration: 13s; box-shadow: 0 0 18px rgba(224, 122, 122, 0.45); }
+    .practices-particle:nth-child(6) { width: 18px; height: 18px; background: rgba(224, 122, 122, 0.45); left: 78%; top: 58%; animation-delay: -5s; animation-duration: 8s; box-shadow: 0 0 28px rgba(224, 122, 122, 0.3); }
+    /* Teal particles */
+    .practices-particle:nth-child(7) { width: 14px; height: 14px; background: rgba(45, 212, 191, 0.5); left: 88%; top: 38%; animation-delay: -2.5s; animation-duration: 10s; box-shadow: 0 0 22px rgba(45, 212, 191, 0.4); }
+    .practices-particle:nth-child(8) { width: 10px; height: 10px; background: rgba(45, 212, 191, 0.6); left: 95%; top: 72%; animation-delay: -4.5s; animation-duration: 12s; box-shadow: 0 0 18px rgba(45, 212, 191, 0.5); }
+    .practices-particle:nth-child(9) { width: 8px; height: 8px; background: rgba(45, 212, 191, 0.55); left: 5%; top: 80%; animation-delay: -1.5s; animation-duration: 11s; box-shadow: 0 0 15px rgba(45, 212, 191, 0.45); }
+    .practices-particle:nth-child(10) { width: 16px; height: 16px; background: rgba(45, 212, 191, 0.45); left: 42%; top: 15%; animation-delay: -3.5s; animation-duration: 14s; box-shadow: 0 0 25px rgba(45, 212, 191, 0.35); }
+    /* Bright sparkle particles */
+    .practices-particle:nth-child(11) { width: 6px; height: 6px; background: #fff; left: 25%; top: 45%; animation-delay: -0.5s; animation-duration: 7s; box-shadow: 0 0 12px rgba(224, 122, 122, 0.8), 0 0 24px rgba(224, 122, 122, 0.4); }
+    .practices-particle:nth-child(12) { width: 6px; height: 6px; background: #fff; left: 72%; top: 28%; animation-delay: -2.8s; animation-duration: 9s; box-shadow: 0 0 12px rgba(45, 212, 191, 0.8), 0 0 24px rgba(45, 212, 191, 0.4); }
+    @keyframes particleFloat {
+      0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.4; }
+      25% { transform: translateY(-25px) translateX(10px) scale(1.3); opacity: 0.9; }
+      50% { transform: translateY(-15px) translateX(-5px) scale(0.9); opacity: 0.5; }
+      75% { transform: translateY(-30px) translateX(8px) scale(1.15); opacity: 0.75; }
+    }
+    .practices-header {
+      text-align: center;
+      padding-bottom: 32px;
+      position: relative;
+      z-index: 5;
+    }
+    /* Carousel wrapper */
+    .practices-carousel-wrapper {
+      position: relative;
+      z-index: 5;
+    }
+    .practices-carousel-wrapper::before,
+    .practices-carousel-wrapper::after {
       content: '';
       position: absolute;
       top: 0;
-      left: 0;
-      right: 0;
       bottom: 0;
-      background:
-        radial-gradient(ellipse at 10% 20%, rgba(224, 122, 122, 0.04) 0%, transparent 50%),
-        radial-gradient(ellipse at 90% 80%, rgba(90, 122, 138, 0.04) 0%, transparent 50%);
+      width: 120px;
+      z-index: 2;
       pointer-events: none;
     }
-    .practices-section .practice-card {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    .practices-carousel-wrapper::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(250, 248, 248, 0.95) 0%, transparent 100%);
     }
-    .practices-section .practice-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    .practices-carousel-wrapper::after {
+      right: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(250, 248, 248, 0.95) 100%);
+    }
+    /* Navigation arrows */
+    .practices-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(224, 122, 122, 0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      color: var(--primary-600);
+    }
+    .practices-nav:hover {
+      background: var(--primary-500);
+      color: white;
+      box-shadow: 0 8px 30px rgba(224, 122, 122, 0.4);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .practices-nav svg {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+    }
+    .practices-nav:hover svg {
+      transform: scale(1.1);
+    }
+    .practices-nav-prev {
+      left: 20px;
+    }
+    .practices-nav-next {
+      right: 20px;
+    }
+    .practices-carousel {
+      display: flex;
+      gap: 24px;
+      animation: practicesScroll 35s linear infinite;
+      width: max-content;
+      padding: 20px 0;
+    }
+    .practices-carousel:hover,
+    .practices-carousel.paused {
+      animation-play-state: paused;
+    }
+    @keyframes practicesScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    /* Practice cards with 3D tilt effect */
+    .practice-card-carousel {
+      display: flex;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 16px;
+      padding: 28px;
+      min-width: 320px;
+      max-width: 320px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    /* Animated gradient border */
+    .practice-card-carousel::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 18px;
+      background: linear-gradient(135deg,
+        var(--primary-400) 0%,
+        var(--teal-400) 25%,
+        var(--primary-300) 50%,
+        var(--teal-500) 75%,
+        var(--primary-400) 100%);
+      background-size: 300% 300%;
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.4s ease;
+      animation: gradientBorderRotate 4s linear infinite;
+    }
+    @keyframes gradientBorderRotate {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    /* Shimmer effect */
+    .practice-card-carousel::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%
+      );
+      transition: left 0.6s ease;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .practice-card-carousel:hover {
+      background: rgba(255, 255, 255, 1);
+      border-color: transparent;
+      box-shadow: 0 25px 50px rgba(224, 122, 122, 0.2);
+      transform: translateY(-12px) rotateX(2deg);
+    }
+    .practice-card-carousel:hover::before {
+      opacity: 1;
+    }
+    .practice-card-carousel:hover::after {
+      left: 100%;
+    }
+    /* Inner content container for 3D effect */
+    .practice-card-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 14px;
+      padding: 4px;
+    }
+    .practice-card-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-100) 0%, rgba(224, 122, 122, 0.15) 100%);
+      border-radius: 14px;
+      margin-bottom: 20px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Icon glow ring */
+    .practice-card-icon::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--primary-300), var(--teal-300));
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.4s ease;
+      filter: blur(8px);
+    }
+    .practice-card-icon svg {
+      width: 28px;
+      height: 28px;
+      color: var(--primary-600);
+      stroke-width: 1.5;
+      transition: all 0.4s ease;
+    }
+    .practice-card-carousel:hover .practice-card-icon {
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+      box-shadow: 0 8px 20px rgba(224, 122, 122, 0.3);
+      transform: scale(1.05) rotate(-3deg);
+    }
+    .practice-card-carousel:hover .practice-card-icon::before {
+      opacity: 0.6;
+    }
+    .practice-card-carousel:hover .practice-card-icon svg {
+      color: var(--white);
+      transform: scale(1.15) rotate(3deg);
+    }
+    .practice-card-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+      line-height: 1.3;
+      transition: color 0.3s ease;
+    }
+    .practice-card-carousel:hover .practice-card-name {
+      color: var(--primary-700);
+    }
+    .practice-card-tagline {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--primary-600);
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+    .practice-card-desc {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .practice-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-600);
+      margin-top: 16px;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s ease;
+    }
+    .practice-card-link svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+    .practice-card-carousel:hover .practice-card-link {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .practice-card-carousel:hover .practice-card-link svg {
+      transform: translateX(4px);
+    }
+    /* Progress indicator */
+    .practices-progress {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding-top: 28px;
+      position: relative;
+      z-index: 5;
+    }
+    .practices-progress-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(224, 122, 122, 0.25);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .practices-progress-dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: transparent;
+    }
+    .practices-progress-dot:hover {
+      background: rgba(224, 122, 122, 0.5);
+      transform: scale(1.2);
+    }
+    .practices-progress-dot.active {
+      background: var(--primary-500);
+      width: 24px;
+      border-radius: 4px;
+    }
+    /* View all link */
+    .practices-view-all {
+      text-align: center;
+      padding-top: 24px;
+      position: relative;
+      z-index: 5;
+    }
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .practices-section {
+        padding: 60px 0;
+      }
+      .practices-carousel-wrapper::before,
+      .practices-carousel-wrapper::after {
+        width: 60px;
+      }
+      .practice-card-carousel {
+        min-width: 280px;
+        max-width: 280px;
+        padding: 24px;
+      }
+      .practice-card-name {
+        font-size: 18px;
+      }
+      .practices-nav {
+        display: none;
+      }
+      /* Reduce animations on mobile for performance */
+      .practices-particle,
+      .practices-streak,
+      .practices-wave,
+      .practices-mesh {
+        display: none;
+      }
+      .practices-pulse,
+      .practices-blob {
+        animation: none;
+        opacity: 0.2;
+      }
+      .practices-blob {
+        filter: blur(80px);
+      }
     }
   </style>
-  <section class="section practices-section">
-    <div class="container" style="position: relative; z-index: 1;">
-      <div class="section-header animate-on-scroll" style="text-align: center; max-width: 640px; margin: 0 auto var(--space-12);">
-        <div class="accent-line accent-line-center"></div>
-        <p class="section-label">Our Practices</p>
-        <h2 class="section-title">Expertise across disciplines</h2>
-        <p class="section-description" style="margin: 0 auto;">From actuarial science to digital transformation, we bring deep specialization to every engagement.</p>
-      </div>
-      <div class="grid-3" id="homePracticesGrid">
+  <section class="practices-section">
+    <!-- Animated gradient background -->
+    <div class="practices-animated-bg"></div>
+
+    <!-- Animated mesh grid -->
+    <div class="practices-mesh"></div>
+
+    <!-- Large floating blobs -->
+    <div class="practices-blob practices-blob-1"></div>
+    <div class="practices-blob practices-blob-2"></div>
+    <div class="practices-blob practices-blob-3"></div>
+
+    <!-- Rotating wave rings -->
+    <div class="practices-waves">
+      <div class="practices-wave practices-wave-1"></div>
+      <div class="practices-wave practices-wave-2"></div>
+      <div class="practices-wave practices-wave-3"></div>
+    </div>
+
+    <!-- Falling light streaks -->
+    <div class="practices-streaks">
+      <div class="practices-streak"></div>
+      <div class="practices-streak"></div>
+      <div class="practices-streak"></div>
+      <div class="practices-streak"></div>
+      <div class="practices-streak"></div>
+      <div class="practices-streak"></div>
+      <div class="practices-streak"></div>
+      <div class="practices-streak"></div>
+    </div>
+
+    <!-- Glowing pulse circles -->
+    <div class="practices-pulses">
+      <div class="practices-pulse"></div>
+      <div class="practices-pulse"></div>
+      <div class="practices-pulse"></div>
+    </div>
+
+    <!-- Floating particles -->
+    <div class="practices-particles">
+      <div class="practices-particle"></div>
+      <div class="practices-particle"></div>
+      <div class="practices-particle"></div>
+      <div class="practices-particle"></div>
+      <div class="practices-particle"></div>
+      <div class="practices-particle"></div>
+      <div class="practices-particle"></div>
+      <div class="practices-particle"></div>
+      <div class="practices-particle"></div>
+      <div class="practices-particle"></div>
+      <div class="practices-particle"></div>
+      <div class="practices-particle"></div>
+    </div>
+
+    <div class="container practices-header">
+      <div class="accent-line accent-line-center"></div>
+      <p class="section-label">Our Practices</p>
+      <h2 class="section-title">Expertise across disciplines</h2>
+      <p class="section-description" style="margin: 0 auto; max-width: 580px;">From actuarial science to digital transformation, we bring deep specialization to every engagement.</p>
+    </div>
+
+    <div class="practices-carousel-wrapper">
+      <!-- Navigation arrows -->
+      <button class="practices-nav practices-nav-prev" aria-label="Previous" onclick="scrollPracticesCarousel(-1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <button class="practices-nav practices-nav-next" aria-label="Next" onclick="scrollPracticesCarousel(1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+
+      <div class="practices-carousel" id="homePracticesGrid">
         <!-- Practices loaded dynamically from Google Sheets -->
-        <div class="loading-message" style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: var(--gray-500);">
+        <div class="loading-message" style="padding: 40px 20px; color: var(--gray-500);">
           Loading practices...
         </div>
       </div>
     </div>
+
+    <!-- Progress dots -->
+    <div class="practices-progress" id="practicesProgress">
+      <div class="practices-progress-dot active"></div>
+      <div class="practices-progress-dot"></div>
+      <div class="practices-progress-dot"></div>
+      <div class="practices-progress-dot"></div>
+      <div class="practices-progress-dot"></div>
+    </div>
+
+    <div class="practices-view-all">
+      <a href="practices.html" class="btn btn-primary">
+        View All Practices
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
   </section>
+
+  <script>
+    // Practices carousel navigation
+    function scrollPracticesCarousel(direction) {
+      const carousel = document.getElementById('homePracticesGrid');
+      const cardWidth = 344; // card width + gap
+      const currentTransform = carousel.style.transform || 'translateX(0)';
+      const currentX = parseFloat(currentTransform.replace('translateX(', '').replace('px)', '')) || 0;
+      const newX = currentX - (direction * cardWidth);
+
+      // Pause auto-scroll
+      carousel.classList.add('paused');
+      carousel.style.animation = 'none';
+      carousel.style.transform = `translateX(${newX}px)`;
+      carousel.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+
+      // Update progress dots
+      updatePracticesProgress(newX);
+
+      // Resume auto-scroll after 5 seconds
+      clearTimeout(window.practicesAutoScrollTimeout);
+      window.practicesAutoScrollTimeout = setTimeout(() => {
+        carousel.classList.remove('paused');
+        carousel.style.animation = '';
+        carousel.style.transform = '';
+        carousel.style.transition = '';
+      }, 5000);
+    }
+
+    function updatePracticesProgress(scrollX) {
+      const dots = document.querySelectorAll('.practices-progress-dot');
+      const totalWidth = document.getElementById('homePracticesGrid').scrollWidth / 2;
+      const progress = Math.abs(scrollX) / totalWidth;
+      const activeDot = Math.min(Math.floor(progress * dots.length), dots.length - 1);
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === activeDot);
+      });
+    }
+
+    // Auto-update progress based on animation
+    setInterval(() => {
+      const carousel = document.getElementById('homePracticesGrid');
+      if (!carousel.classList.contains('paused') && carousel.children.length > 1) {
+        const style = window.getComputedStyle(carousel);
+        const transform = style.transform;
+        if (transform !== 'none') {
+          const matrix = new DOMMatrixReadOnly(transform);
+          updatePracticesProgress(matrix.m41);
+        }
+      }
+    }, 500);
+  </script>
 
   <!-- Featured Products Section -->
   <style>
@@ -1450,43 +2099,47 @@
       graduation: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>'
     };
 
-    // Load and render home page practices
+    // Load and render home page practices (carousel)
     async function loadHomePractices() {
-      const practicesGrid = document.getElementById('homePracticesGrid');
-      if (!practicesGrid) return;
+      const practicesCarousel = document.getElementById('homePracticesGrid');
+      if (!practicesCarousel) return;
 
       try {
         const practices = await DataLoader.loadPractices();
 
         if (!practices || practices.length === 0) {
-          practicesGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--gray-500);">No practices available.</p>';
+          practicesCarousel.innerHTML = '<p style="padding: 40px; color: var(--gray-500);">No practices available.</p>';
           return;
         }
 
-        practicesGrid.innerHTML = practices.map((practice, index) => {
+        // Create practice cards
+        const practiceCards = practices.map(practice => {
           const icon = practiceIcons[practice.icon] || practiceIcons.chart;
-          const staggerClass = `stagger-${index + 1}`;
+          const tagline = practice.tagline || '';
+          const description = practice.homedescription || practice.homeDescription || '';
 
           return `
-            <a href="practices.html" class="practice-card animate-on-scroll ${staggerClass}">
-              <div class="practice-icon">
+            <a href="practices.html" class="practice-card-carousel">
+              <div class="practice-card-icon">
                 ${icon}
               </div>
-              <h3 class="practice-card-title">${practice.name || ''}</h3>
-              <p class="practice-card-description">${practice.homedescription || practice.homeDescription || ''}</p>
-              <span class="practice-card-link">Explore practice <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+              <h3 class="practice-card-name">${practice.name || ''}</h3>
+              ${tagline ? `<p class="practice-card-tagline">${tagline}</p>` : ''}
+              <p class="practice-card-desc">${description}</p>
+              <span class="practice-card-link">
+                Learn more
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
             </a>
           `;
         }).join('');
 
-        // Re-observe new elements for animation
-        practicesGrid.querySelectorAll('.animate-on-scroll').forEach(el => {
-          observer.observe(el);
-        });
+        // Duplicate for seamless infinite scroll
+        practicesCarousel.innerHTML = practiceCards + practiceCards;
 
       } catch (error) {
         console.error('Error loading practices:', error);
-        practicesGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--gray-500);">Unable to load practices. Please try again later.</p>';
+        practicesCarousel.innerHTML = '<p style="padding: 40px; color: var(--gray-500);">Unable to load practices. Please try again later.</p>';
       }
     }
 
