@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Partners | DD Consulting</title>
-  <meta name="description" content="DD Consulting partners with industry leaders including Flick Network for E-Invoicing and Arcanum for AI solutions to deliver best-in-class technology to our clients.">
+  <meta name="description" content="DD Consulting partners with industry leaders including Flick Network for E-Invoicing, Arcanum for AI solutions, and Accredibly for ESG & Sustainability to deliver best-in-class technology to our clients.">
   <link rel="icon" type="image/png" href="DD Logo.png">
   <link rel="apple-touch-icon" href="DD Logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,6 +71,28 @@
     /* Arcanum - Exact brand color #9949AC */
     .partner-logo-area.arcanum {
       background: linear-gradient(135deg, #9949AC 0%, #AD5DC0 50%, #7D3A8E 100%);
+    }
+
+    /* Accredibly - Brand colors: Navy blue #2D3E50 with gold accents */
+    .partner-logo-area.accredibly {
+      background: linear-gradient(135deg, #2D3E50 0%, #3D4F5F 50%, #1E2D3D 100%);
+    }
+
+    .partner-logo-area.accredibly .partner-logo {
+      filter: none;
+    }
+
+    .partner-logo-area.accredibly .partner-logo img {
+      filter: none;
+    }
+
+    /* Accredibly text logo fallback */
+    .accredibly-logo-text {
+      font-family: 'Times New Roman', Georgia, serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: #C9A962;
+      letter-spacing: 0.02em;
     }
 
     .partnership-badge {
@@ -229,6 +251,18 @@
     #ai-solutions .benefit-item:hover {
       background: rgba(153, 73, 172, 0.08);
       border-left-color: #9949AC;
+    }
+
+    /* Accredibly hover - brand color #2D3E50 navy blue */
+    #esg-sustainability .benefit-item {
+      border-left-color: #2D3E50;
+    }
+    #esg-sustainability .benefit-item svg {
+      color: #2D3E50;
+    }
+    #esg-sustainability .benefit-item:hover {
+      background: rgba(45, 62, 80, 0.08);
+      border-left-color: #2D3E50;
     }
 
     .benefit-item svg {
@@ -558,6 +592,66 @@
           </div>
         </div>
       </div>
+
+      <!-- Accredibly Partnership -->
+      <div class="partnership" id="esg-sustainability">
+        <div class="partnership-card">
+          <div class="partner-logo-area accredibly">
+            <span class="partnership-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M7 12l3 3 7-7"/></svg>
+              Official Partner
+            </span>
+            <div class="partner-logo">
+              <span class="accredibly-logo-text">Accredibly</span>
+            </div>
+            <p class="partner-tagline">Smart technology for regulatory obligations — Sustainability & Climate Disclosure</p>
+            <a href="https://accredibly.com.au" target="_blank" rel="noopener noreferrer" class="partner-website-link">
+              Visit accredibly.com.au
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+          <div class="partner-content">
+            <p class="partner-label">ESG & Sustainability</p>
+            <h2 class="partner-title">ESG & Climate Disclosure Solutions</h2>
+            <p class="partner-description">DD Consulting partners with Accredibly to deliver comprehensive ESG and sustainability solutions to organisations across the GCC region. Accredibly's Smart Sustainability & Climate Disclosure Platform enables businesses to meet evolving regulatory requirements while driving meaningful environmental impact.</p>
+            <p class="partner-description">The platform provides end-to-end support for GHG accounting, sustainability reporting, and compliance management — helping organisations navigate the complex landscape of climate disclosure regulations with confidence and precision.</p>
+
+            <div class="partner-benefits">
+              <p class="partner-benefits-title">Key Capabilities</p>
+              <div class="benefits-grid">
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>GHG accounting & emissions tracking</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Climate disclosure compliance</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Sustainability reporting automation</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Regulatory obligation management</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>ESG data analytics & insights</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Privacy & consent compliance tools</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="partner-cta">
+              <a href="contact.html" class="btn btn-primary">Discuss Your ESG Goals</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -638,8 +732,8 @@
             <a href="https://www.reserium.io" target="_blank" class="footer-link">Reserium</a>
             <a href="products.html" class="footer-link">GLM Pricing Tool</a>
             <a href="partners.html#ai-solutions" class="footer-link">AI Solutions</a>
+            <a href="partners.html#esg-sustainability" class="footer-link">ESG Solutions</a>
             <a href="products.html" class="footer-link">Motor Pricing Insights</a>
-            <a href="products.html" class="footer-link">Medical Pricing Insights</a>
           </div>
         </div>
         <div class="footer-column">
