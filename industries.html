@@ -141,87 +141,11 @@
 
   <section class="section">
     <div class="container">
-      <div class="grid-2">
-
-        <div class="industry-card">
-          <div class="industry-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h2 class="industry-name">Insurance</h2>
-          <p class="industry-description">Life, health, and general insurers across the GCC and beyond trust us for actuarial excellence, regulatory compliance, and strategic transformation. We help carriers navigate evolving markets while maintaining profitability.</p>
-          <div class="industry-practices">
-            <span class="industry-practice">Actuarial</span>
-            <span class="industry-practice">Accounting</span>
-            <span class="industry-practice">ESG</span>
-            <span class="industry-practice">Technology</span>
-          </div>
+      <div class="grid-2" id="industries-container">
+        <!-- Industries loaded dynamically from Google Sheets -->
+        <div class="loading-message" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--gray-500);">
+          Loading industries...
         </div>
-
-        <div class="industry-card">
-          <div class="industry-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
-          </div>
-          <h2 class="industry-name">Reinsurance</h2>
-          <p class="industry-description">We support reinsurers with treaty pricing, reserving, and strategic portfolio optimization. Our deep understanding of risk transfer mechanisms enables better decision-making across the reinsurance value chain.</p>
-          <div class="industry-practices">
-            <span class="industry-practice">Actuarial</span>
-            <span class="industry-practice">Technology</span>
-          </div>
-        </div>
-
-        <div class="industry-card">
-          <div class="industry-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-          </div>
-          <h2 class="industry-name">Banking & Financial Services</h2>
-          <p class="industry-description">We help banks and financial institutions with risk management, regulatory compliance, and digital transformation. From Basel requirements to ESG integration, we address the full spectrum of financial services challenges.</p>
-          <div class="industry-practices">
-            <span class="industry-practice">Accounting</span>
-            <span class="industry-practice">ESG</span>
-            <span class="industry-practice">E-Invoicing</span>
-            <span class="industry-practice">Technology</span>
-          </div>
-        </div>
-
-        <div class="industry-card">
-          <div class="industry-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/><path d="M9 18v.01"/></svg>
-          </div>
-          <h2 class="industry-name">Corporate & Conglomerates</h2>
-          <p class="industry-description">Large corporations rely on us for employee benefits consulting, ESG strategy, and financial advisory. We help enterprises manage risk, optimize capital, and build sustainable business practices.</p>
-          <div class="industry-practices">
-            <span class="industry-practice">Actuarial</span>
-            <span class="industry-practice">Accounting</span>
-            <span class="industry-practice">ESG</span>
-            <span class="industry-practice">E-Invoicing</span>
-          </div>
-        </div>
-
-        <div class="industry-card">
-          <div class="industry-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18"/><path d="M9 8h1"/><path d="M9 12h1"/><path d="M9 16h1"/><path d="M14 8h1"/><path d="M14 12h1"/><path d="M14 16h1"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/></svg>
-          </div>
-          <h2 class="industry-name">Government & Public Sector</h2>
-          <p class="industry-description">We partner with government entities on policy analysis, pension reform, social insurance programs, and digital government initiatives. Our work helps shape public programs that serve citizens effectively.</p>
-          <div class="industry-practices">
-            <span class="industry-practice">Actuarial</span>
-            <span class="industry-practice">ESG</span>
-            <span class="industry-practice">Technology</span>
-          </div>
-        </div>
-
-        <div class="industry-card">
-          <div class="industry-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <h2 class="industry-name">Healthcare</h2>
-          <p class="industry-description">Healthcare organizations benefit from our expertise in health economics, provider analytics, and population health management. We help payers and providers optimize care delivery while managing costs.</p>
-          <div class="industry-practices">
-            <span class="industry-practice">Actuarial</span>
-            <span class="industry-practice">Technology</span>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
@@ -289,6 +213,7 @@
     </div>
   </footer>
 
+  <script src="js/data-loader.js"></script>
   <script>
     const menuToggle = document.getElementById('menuToggle');
     const mainNav = document.getElementById('mainNav');
@@ -308,6 +233,57 @@
       link.addEventListener('click', () => { if (mainNav.classList.contains('active')) toggleMenu(); });
     });
     window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
+
+    // Icon mapping for industries
+    const industryIcons = {
+      shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+      'shield-alert': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>',
+      table: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>',
+      building: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/><path d="M9 18v.01"/></svg>',
+      government: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18"/><path d="M9 8h1"/><path d="M9 12h1"/><path d="M9 16h1"/><path d="M14 8h1"/><path d="M14 12h1"/><path d="M14 16h1"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/></svg>',
+      heartbeat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>'
+    };
+
+    // Load industries from Google Sheets
+    async function loadIndustries() {
+      const container = document.getElementById('industries-container');
+
+      try {
+        const industries = await DataLoader.loadIndustries();
+
+        if (!industries || industries.length === 0) {
+          container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--gray-500);">No industries available.</p>';
+          return;
+        }
+
+        container.innerHTML = industries.map(industry => {
+          const practices = industry.practices ? industry.practices.split('|').map(p => p.trim()) : [];
+          const icon = industryIcons[industry.icon] || industryIcons.shield;
+
+          return `
+            <div class="industry-card">
+              <div class="industry-icon">
+                ${icon}
+              </div>
+              <h2 class="industry-name">${industry.name || ''}</h2>
+              <p class="industry-description">${industry.description || ''}</p>
+              ${practices.length > 0 ? `
+                <div class="industry-practices">
+                  ${practices.map(practice => `<span class="industry-practice">${practice}</span>`).join('')}
+                </div>
+              ` : ''}
+            </div>
+          `;
+        }).join('');
+
+      } catch (error) {
+        console.error('Error loading industries:', error);
+        container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--gray-500);">Unable to load industries. Please try again later.</p>';
+      }
+    }
+
+    // Initialize
+    loadIndustries();
   </script>
 
 </body>

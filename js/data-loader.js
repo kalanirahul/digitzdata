@@ -38,7 +38,9 @@ const DataLoader = (function() {
     webinars: 'Webinars',
     training: 'Training',
     trainers: 'Trainers',
-    jobs: 'Jobs'
+    jobs: 'Jobs',
+    practices: 'Practices',
+    industries: 'Industries'
   };
 
   // Cache duration in milliseconds (5 minutes)
@@ -53,6 +55,31 @@ const DataLoader = (function() {
   // ============================================
 
   const cache = {};
+
+  // Auto-clear cache if URL has ?refresh=1 or ?nocache=1 parameter
+  (function checkForceRefresh() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('refresh') || urlParams.has('nocache')) {
+      Object.keys(cache).forEach(key => delete cache[key]);
+      // Remove the parameter from URL without page reload (clean URL)
+      if (window.history && window.history.replaceState) {
+        urlParams.delete('refresh');
+        urlParams.delete('nocache');
+        const newUrl = urlParams.toString()
+          ? `${window.location.pathname}?${urlParams.toString()}`
+          : window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+      }
+    }
+  })();
+
+  // Also check sessionStorage for forced refresh flag (set by admin)
+  (function checkSessionRefresh() {
+    if (sessionStorage.getItem('dd_force_refresh')) {
+      Object.keys(cache).forEach(key => delete cache[key]);
+      sessionStorage.removeItem('dd_force_refresh');
+    }
+  })();
 
   // ============================================
   // UTILITY FUNCTIONS
@@ -369,6 +396,102 @@ const DataLoader = (function() {
           requirements: 'Masters in Data Science or related field, 2+ years experience, Python, R, ML frameworks',
           applyLink: ''
         }
+      ],
+      [SHEETS.practices]: [
+        {
+          name: 'Actuarial Services',
+          tagline: 'Risk quantified.',
+          homedescription: 'Statutory valuations, pricing, reserving, risk modeling, ORSA, and pension services for life, health, and general insurance.',
+          description: 'Our actuarial practice provides comprehensive solutions for life, health, and general insurance companies. We combine deep technical expertise with practical business insight to help clients navigate complex regulatory requirements, optimize pricing strategies, and build robust risk management frameworks.',
+          services: 'Appointed Actuary Services|Peer Review Actuary|Pricing & Product Development|Reserving & IBNR Analysis|Risk Modeling|Reinsurance Optimization|M&A Due Diligence|ORSA & Risk Management Services|Actuarial Experts for Auditors|Pension & Gratuity Services',
+          icon: 'chart'
+        },
+        {
+          name: 'IFRS 17 Implementation & Support',
+          tagline: 'Compliance delivered.',
+          homedescription: 'End-to-end IFRS 17 implementation, managed services, training, and actuarial support for insurers.',
+          description: 'DD Consulting provides end-to-end IFRS 17 implementation and support services, helping insurers meet regulatory requirements with confidence and efficiency. Our services cover the full IFRS 17 lifecycle, including actuarial assumptions and methodologies, data and input preparation, calculations, results analysis, disclosure preparation, and ongoing regulatory and audit support.',
+          services: 'IFRS 17 Managed Services|IFRS 17 Training & Knowledge Transfer|IFRS 17 Resource Outsourcing|Actuarial Expert Services for Auditors|Third-Party IFRS 17 Platforms|In-House IFRS 17 Solutions',
+          icon: 'clipboard'
+        },
+        {
+          name: 'Accounting & Finance',
+          tagline: 'Clarity in complexity.',
+          homedescription: 'IFRS 9 consulting, audit support, financial due diligence, ICOFR, and valuation services.',
+          description: 'We provide expert accounting, audit support, and financial advisory services tailored for complex regulatory environments. Our team helps organizations maintain financial integrity while navigating evolving standards and stakeholder expectations.',
+          services: 'IFRS 9 Consulting|Audit Support|Financial Due Diligence|ICOFR (Internal Controls Over Financial Reporting)|Financial Reporting|Unlisted Equity Valuation Services',
+          icon: 'table'
+        },
+        {
+          name: 'ESG & Sustainability',
+          tagline: 'Purpose meets performance.',
+          homedescription: 'ESG strategy, climate risk assessment, sustainability reporting, and carbon analysis.',
+          description: 'We help organizations measure, report, and improve their environmental, social, and governance impact. Our approach integrates ESG considerations into core business strategy, creating value while addressing stakeholder expectations.',
+          services: 'ESG Strategy Development|Climate Risk Assessment|Sustainability Reporting|Carbon Footprint Analysis|ESG Due Diligence|Stakeholder Engagement',
+          icon: 'globe'
+        },
+        {
+          name: 'E-Invoicing',
+          tagline: 'Compliance automated.',
+          homedescription: 'E-invoicing implementation, system integration, and digital invoicing transformation.',
+          description: 'Navigate the rapidly evolving landscape of electronic invoicing mandates across the GCC. We help organizations implement compliant systems and processes that meet regulatory requirements while improving operational efficiency.',
+          services: 'E-Invoicing Implementation Services|System Integration|Compliance Monitoring|Process Automation|Training & Support',
+          icon: 'document'
+        },
+        {
+          name: 'Technology & Analytics',
+          tagline: 'Data-driven decisions.',
+          homedescription: 'Data engineering, BI dashboards, AI/ML solutions, automation, and cloud reserving platform.',
+          description: 'Our technology practice delivers business intelligence, data analytics, and custom software solutions that transform data into competitive advantage. We build tools that solve real problems and create lasting value.',
+          services: 'Business Intelligence|Data Engineering|Custom Development|AI & Machine Learning|System Integration|Analytics Strategy|Dashboard & Email Automation Services|Cloud Based Reserving Platform',
+          icon: 'monitor'
+        },
+        {
+          name: 'Training & Development',
+          tagline: 'Building capability, driving growth.',
+          homedescription: 'Actuarial training, IFRS 17 workshops, and custom corporate development programs.',
+          description: 'We deliver tailored training programs and professional development solutions that build organizational capability. Our programs combine technical expertise with practical application, empowering teams to excel in their roles and adapt to evolving industry demands.',
+          services: 'Actuarial Training Programs|IFRS 17 Workshops|Technical Skills Development|Leadership Development|Regulatory Compliance Training|Custom Corporate Training',
+          icon: 'graduation'
+        }
+      ],
+      [SHEETS.industries]: [
+        {
+          name: 'Insurance',
+          description: 'Life, health, and general insurers across the GCC and beyond trust us for actuarial excellence, regulatory compliance, and strategic transformation. We help carriers navigate evolving markets while maintaining profitability.',
+          practices: 'Actuarial|Accounting|ESG|Technology',
+          icon: 'shield'
+        },
+        {
+          name: 'Reinsurance',
+          description: 'We support reinsurers with treaty pricing, reserving, and strategic portfolio optimization. Our deep understanding of risk transfer mechanisms enables better decision-making across the reinsurance value chain.',
+          practices: 'Actuarial|Technology',
+          icon: 'shield-alert'
+        },
+        {
+          name: 'Banking & Financial Services',
+          description: 'We help banks and financial institutions with risk management, regulatory compliance, and digital transformation. From Basel requirements to ESG integration, we address the full spectrum of financial services challenges.',
+          practices: 'Accounting|ESG|E-Invoicing|Technology',
+          icon: 'table'
+        },
+        {
+          name: 'Corporate & Conglomerates',
+          description: 'Large corporations rely on us for employee benefits consulting, ESG strategy, and financial advisory. We help enterprises manage risk, optimize capital, and build sustainable business practices.',
+          practices: 'Actuarial|Accounting|ESG|E-Invoicing',
+          icon: 'building'
+        },
+        {
+          name: 'Government & Public Sector',
+          description: 'We partner with government entities on policy analysis, pension reform, social insurance programs, and digital government initiatives. Our work helps shape public programs that serve citizens effectively.',
+          practices: 'Actuarial|ESG|Technology',
+          icon: 'government'
+        },
+        {
+          name: 'Healthcare',
+          description: 'Healthcare organizations benefit from our expertise in health economics, provider analytics, and population health management. We help payers and providers optimize care delivery while managing costs.',
+          practices: 'Actuarial|Technology',
+          icon: 'heartbeat'
+        }
       ]
     };
 
@@ -416,6 +539,20 @@ const DataLoader = (function() {
     },
 
     /**
+     * Load practices from Google Sheets
+     */
+    async loadPractices() {
+      return await fetchSheetData(SHEETS.practices);
+    },
+
+    /**
+     * Load industries from Google Sheets
+     */
+    async loadIndustries() {
+      return await fetchSheetData(SHEETS.industries);
+    },
+
+    /**
      * Convert Google Drive URL to direct image URL
      */
     convertImageUrl: convertGoogleDriveUrl,
@@ -425,6 +562,22 @@ const DataLoader = (function() {
      */
     clearCache() {
       Object.keys(cache).forEach(key => delete cache[key]);
+    },
+
+    /**
+     * Force refresh on next page load (sets sessionStorage flag)
+     * Useful when updating Google Sheets data
+     */
+    forceRefreshOnNextLoad() {
+      sessionStorage.setItem('dd_force_refresh', '1');
+    },
+
+    /**
+     * Reload current page with fresh data
+     */
+    refreshNow() {
+      Object.keys(cache).forEach(key => delete cache[key]);
+      window.location.reload();
     },
 
     /**

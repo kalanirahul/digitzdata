@@ -135,6 +135,49 @@ async function generateExcel() {
   jobsData.forEach(row => jobsSheet.addRow(row));
   styleHeader(jobsSheet);
 
+  // ============ PRACTICES SHEET ============
+  const practicesSheet = workbook.addWorksheet('Practices');
+  practicesSheet.columns = [
+    { header: 'name', key: 'name', width: 35 },
+    { header: 'tagline', key: 'tagline', width: 30 },
+    { header: 'homeDescription', key: 'homeDescription', width: 80 },
+    { header: 'description', key: 'description', width: 100 },
+    { header: 'services', key: 'services', width: 120 },
+    { header: 'icon', key: 'icon', width: 15 }
+  ];
+
+  const practicesData = [
+    { name: 'Actuarial Services', tagline: 'Risk quantified.', homeDescription: 'Statutory valuations, pricing, reserving, risk modeling, ORSA, and pension services for life, health, and general insurance.', description: 'Our actuarial practice provides comprehensive solutions for life, health, and general insurance companies. We combine deep technical expertise with practical business insight to help clients navigate complex regulatory requirements, optimize pricing strategies, and build robust risk management frameworks.', services: 'Appointed Actuary Services|Peer Review Actuary|Pricing & Product Development|Reserving & IBNR Analysis|Risk Modeling|Reinsurance Optimization|M&A Due Diligence|ORSA & Risk Management Services|Actuarial Experts for Auditors|Pension & Gratuity Services', icon: 'chart' },
+    { name: 'IFRS 17 Implementation & Support', tagline: 'Compliance delivered.', homeDescription: 'End-to-end IFRS 17 implementation, managed services, training, and actuarial support for insurers.', description: 'DD Consulting provides end-to-end IFRS 17 implementation and support services, helping insurers meet regulatory requirements with confidence and efficiency. Our services cover the full IFRS 17 lifecycle, including actuarial assumptions and methodologies, data and input preparation, calculations, results analysis, disclosure preparation, and ongoing regulatory and audit support.', services: 'IFRS 17 Managed Services|IFRS 17 Training & Knowledge Transfer|IFRS 17 Resource Outsourcing|Actuarial Expert Services for Auditors|Third-Party IFRS 17 Platforms|In-House IFRS 17 Solutions', icon: 'clipboard' },
+    { name: 'Accounting & Finance', tagline: 'Clarity in complexity.', homeDescription: 'IFRS 9 consulting, audit support, financial due diligence, ICOFR, and valuation services.', description: 'We provide expert accounting, audit support, and financial advisory services tailored for complex regulatory environments. Our team helps organizations maintain financial integrity while navigating evolving standards and stakeholder expectations.', services: 'IFRS 9 Consulting|Audit Support|Financial Due Diligence|ICOFR (Internal Controls Over Financial Reporting)|Financial Reporting|Unlisted Equity Valuation Services', icon: 'table' },
+    { name: 'ESG & Sustainability', tagline: 'Purpose meets performance.', homeDescription: 'ESG strategy, climate risk assessment, sustainability reporting, and carbon analysis.', description: 'We help organizations measure, report, and improve their environmental, social, and governance impact. Our approach integrates ESG considerations into core business strategy, creating value while addressing stakeholder expectations.', services: 'ESG Strategy Development|Climate Risk Assessment|Sustainability Reporting|Carbon Footprint Analysis|ESG Due Diligence|Stakeholder Engagement', icon: 'globe' },
+    { name: 'E-Invoicing', tagline: 'Compliance automated.', homeDescription: 'E-invoicing implementation, system integration, and digital invoicing transformation.', description: 'Navigate the rapidly evolving landscape of electronic invoicing mandates across the GCC. We help organizations implement compliant systems and processes that meet regulatory requirements while improving operational efficiency.', services: 'E-Invoicing Implementation Services|System Integration|Compliance Monitoring|Process Automation|Training & Support', icon: 'document' },
+    { name: 'Technology & Analytics', tagline: 'Data-driven decisions.', homeDescription: 'Data engineering, BI dashboards, AI/ML solutions, automation, and cloud reserving platform.', description: 'Our technology practice delivers business intelligence, data analytics, and custom software solutions that transform data into competitive advantage. We build tools that solve real problems and create lasting value.', services: 'Business Intelligence|Data Engineering|Custom Development|AI & Machine Learning|System Integration|Analytics Strategy|Dashboard & Email Automation Services|Cloud Based Reserving Platform', icon: 'monitor' },
+    { name: 'Training & Development', tagline: 'Building capability, driving growth.', homeDescription: 'Actuarial training, IFRS 17 workshops, and custom corporate development programs.', description: 'We deliver tailored training programs and professional development solutions that build organizational capability. Our programs combine technical expertise with practical application, empowering teams to excel in their roles and adapt to evolving industry demands.', services: 'Actuarial Training Programs|IFRS 17 Workshops|Technical Skills Development|Leadership Development|Regulatory Compliance Training|Custom Corporate Training', icon: 'graduation' }
+  ];
+  practicesData.forEach(row => practicesSheet.addRow(row));
+  styleHeader(practicesSheet);
+
+  // ============ INDUSTRIES SHEET ============
+  const industriesSheet = workbook.addWorksheet('Industries');
+  industriesSheet.columns = [
+    { header: 'name', key: 'name', width: 35 },
+    { header: 'description', key: 'description', width: 100 },
+    { header: 'practices', key: 'practices', width: 50 },
+    { header: 'icon', key: 'icon', width: 15 }
+  ];
+
+  const industriesData = [
+    { name: 'Insurance', description: 'Life, health, and general insurers across the GCC and beyond trust us for actuarial excellence, regulatory compliance, and strategic transformation. We help carriers navigate evolving markets while maintaining profitability.', practices: 'Actuarial|Accounting|ESG|Technology', icon: 'shield' },
+    { name: 'Reinsurance', description: 'We support reinsurers with treaty pricing, reserving, and strategic portfolio optimization. Our deep understanding of risk transfer mechanisms enables better decision-making across the reinsurance value chain.', practices: 'Actuarial|Technology', icon: 'shield-alert' },
+    { name: 'Banking & Financial Services', description: 'We help banks and financial institutions with risk management, regulatory compliance, and digital transformation. From Basel requirements to ESG integration, we address the full spectrum of financial services challenges.', practices: 'Accounting|ESG|E-Invoicing|Technology', icon: 'table' },
+    { name: 'Corporate & Conglomerates', description: 'Large corporations rely on us for employee benefits consulting, ESG strategy, and financial advisory. We help enterprises manage risk, optimize capital, and build sustainable business practices.', practices: 'Actuarial|Accounting|ESG|E-Invoicing', icon: 'building' },
+    { name: 'Government & Public Sector', description: 'We partner with government entities on policy analysis, pension reform, social insurance programs, and digital government initiatives. Our work helps shape public programs that serve citizens effectively.', practices: 'Actuarial|ESG|Technology', icon: 'government' },
+    { name: 'Healthcare', description: 'Healthcare organizations benefit from our expertise in health economics, provider analytics, and population health management. We help payers and providers optimize care delivery while managing costs.', practices: 'Actuarial|Technology', icon: 'heartbeat' }
+  ];
+  industriesData.forEach(row => industriesSheet.addRow(row));
+  styleHeader(industriesSheet);
+
   // ============ INSTRUCTIONS SHEET ============
   const instructionsSheet = workbook.addWorksheet('Instructions');
   instructionsSheet.columns = [
@@ -225,6 +268,37 @@ async function generateExcel() {
     '  - Jobs section only shows if there are entries in the sheet',
     '  - Delete all rows (except header) to hide the job listings section',
     '  - Apply button links to applyLink URL or defaults to email if empty',
+    '',
+    'PRACTICES - Column Reference:',
+    '  name = Practice name (e.g., Actuarial Services)',
+    '  tagline = Short tagline with period (e.g., Risk quantified.) - shown on Practices page',
+    '  homeDescription = Medium description for Home page cards (1-2 sentences)',
+    '  description = Full practice description paragraph - shown on Practices page',
+    '  services = Pipe-separated list (e.g., Service 1|Service 2|Service 3)',
+    '  icon = Icon name: chart, clipboard, table, globe, document, monitor, graduation',
+    '',
+    'PRACTICES - Icon Values:',
+    '  chart = Line chart (Actuarial)',
+    '  clipboard = Clipboard/checklist (IFRS 17)',
+    '  table = Grid/table (Accounting)',
+    '  globe = Globe/world (ESG)',
+    '  document = Document (E-Invoicing)',
+    '  monitor = Computer screen (Technology)',
+    '  graduation = Graduation cap (Training)',
+    '',
+    'INDUSTRIES - Column Reference:',
+    '  name = Industry name (e.g., Insurance)',
+    '  description = Industry description paragraph',
+    '  practices = Pipe-separated practice tags (e.g., Actuarial|Accounting|ESG)',
+    '  icon = Icon name: shield, shield-alert, table, building, government, heartbeat',
+    '',
+    'INDUSTRIES - Icon Values:',
+    '  shield = Shield (Insurance)',
+    '  shield-alert = Shield with alert (Reinsurance)',
+    '  table = Grid/table (Banking)',
+    '  building = Building (Corporate)',
+    '  government = Government building (Public Sector)',
+    '  heartbeat = Heart pulse (Healthcare)',
     '',
     'PHOTOS - Local Images (Recommended):',
     '  1. Add photos to images/team/ folder in website',
