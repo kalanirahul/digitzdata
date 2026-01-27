@@ -666,22 +666,153 @@
       width: 180px;
       height: 180px;
       margin: 0 auto 24px;
+      perspective: 800px;
+    }
+    /* Outer glow aura */
+    .globe-aura {
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(224, 122, 122, 0.15) 0%, rgba(224, 122, 122, 0.05) 40%, transparent 70%);
+      animation: auraGlow 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes auraGlow {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+    /* Inner glow */
+    .globe-inner-glow {
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 2;
     }
     .globe-svg {
       width: 100%;
       height: 100%;
-      animation: rotateGlobe 30s linear infinite;
+      animation: rotateGlobe 25s linear infinite, wobbleGlobe 8s ease-in-out infinite;
+      transform-style: preserve-3d;
     }
     @keyframes rotateGlobe {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+    @keyframes wobbleGlobe {
+      0%, 100% { transform: rotateX(0deg) rotateZ(0deg); }
+      25% { transform: rotateX(3deg) rotateZ(2deg); }
+      50% { transform: rotateX(-2deg) rotateZ(-1deg); }
+      75% { transform: rotateX(2deg) rotateZ(-2deg); }
+    }
+    /* Orbital rings */
+    .globe-orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      border: 1px dashed rgba(224, 122, 122, 0.2);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .globe-orbit-1 {
+      width: 220px;
+      height: 220px;
+      animation: orbitSpin 20s linear infinite;
+    }
+    .globe-orbit-2 {
+      width: 260px;
+      height: 260px;
+      animation: orbitSpin 30s linear infinite reverse;
+      border-color: rgba(90, 122, 138, 0.15);
+    }
+    @keyframes orbitSpin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    /* Orbiting particles */
+    .orbit-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--primary-400);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--primary-400);
+    }
+    .orbit-particle-1 {
+      top: 50%;
+      left: 50%;
+      animation: orbitParticle1 12s linear infinite;
+    }
+    .orbit-particle-2 {
+      top: 50%;
+      left: 50%;
+      animation: orbitParticle2 18s linear infinite;
+      background: var(--teal-400);
+      box-shadow: 0 0 8px var(--teal-400);
+      width: 4px;
+      height: 4px;
+    }
+    .orbit-particle-3 {
+      top: 50%;
+      left: 50%;
+      animation: orbitParticle3 15s linear infinite;
+      width: 5px;
+      height: 5px;
+    }
+    @keyframes orbitParticle1 {
+      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(110px) rotate(0deg); opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(110px) rotate(-360deg); opacity: 1; }
+    }
+    @keyframes orbitParticle2 {
+      0% { transform: translate(-50%, -50%) rotate(180deg) translateX(130px) rotate(-180deg); opacity: 0.8; }
+      50% { opacity: 0.4; }
+      100% { transform: translate(-50%, -50%) rotate(-180deg) translateX(130px) rotate(180deg); opacity: 0.8; }
+    }
+    @keyframes orbitParticle3 {
+      0% { transform: translate(-50%, -50%) rotate(90deg) translateX(105px) rotate(-90deg); opacity: 0.9; }
+      50% { opacity: 0.3; }
+      100% { transform: translate(-50%, -50%) rotate(450deg) translateX(105px) rotate(-450deg); opacity: 0.9; }
+    }
+    /* Connection arcs between dots */
+    .globe-connections {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .globe-connections svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .connection-arc {
+      fill: none;
+      stroke: url(#arcGradient);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      opacity: 0;
+      animation: arcPulse 4s ease-in-out infinite;
+    }
+    .connection-arc-1 { animation-delay: 0s; }
+    .connection-arc-2 { animation-delay: 1s; }
+    .connection-arc-3 { animation-delay: 2s; }
+    .connection-arc-4 { animation-delay: 3s; }
+    @keyframes arcPulse {
+      0%, 100% { opacity: 0; stroke-dashoffset: 100; }
+      20%, 80% { opacity: 0.6; }
+      50% { opacity: 0.8; stroke-dashoffset: 0; }
     }
     /* Globe Dots */
     .globe-dot {
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       transform: translate(-50%, -50%);
+      z-index: 5;
+      cursor: pointer;
     }
     .globe-dot::before {
       content: '';
@@ -690,6 +821,7 @@
       background: var(--primary-500);
       border-radius: 50%;
       animation: pulseDot 2s ease-in-out infinite;
+      box-shadow: 0 0 8px var(--primary-400), 0 0 16px rgba(224, 122, 122, 0.3);
     }
     .globe-dot::after {
       content: '';
@@ -699,30 +831,77 @@
       border-radius: 50%;
       animation: pulseRing 2s ease-in-out infinite;
     }
+    /* Third expanding ring */
+    .globe-dot .dot-ring {
+      position: absolute;
+      inset: -6px;
+      border: 1px solid rgba(224, 122, 122, 0.2);
+      border-radius: 50%;
+      animation: expandRing 3s ease-out infinite;
+    }
     @keyframes pulseDot {
       0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.8; }
+      50% { transform: scale(1.2); opacity: 0.9; }
     }
     @keyframes pulseRing {
       0%, 100% { transform: scale(1); opacity: 0.6; }
       50% { transform: scale(1.8); opacity: 0; }
     }
-    /* Position dots around the globe */
+    @keyframes expandRing {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+    /* Hover effect on globe container */
+    .globe-container:hover .globe-aura {
+      animation: auraGlowHover 2s ease-in-out infinite;
+    }
+    @keyframes auraGlowHover {
+      0%, 100% { transform: scale(1.1); opacity: 0.9; }
+      50% { transform: scale(1.25); opacity: 1; }
+    }
+    .globe-container:hover .globe-svg {
+      animation: rotateGlobe 15s linear infinite, wobbleGlobe 5s ease-in-out infinite;
+    }
+    .globe-container:hover .orbit-particle-1 {
+      animation: orbitParticle1 8s linear infinite;
+    }
+    .globe-container:hover .orbit-particle-2 {
+      animation: orbitParticle2 12s linear infinite;
+    }
+    /* Position dots around the globe - GCC region (primary color) */
     .globe-dot-1 { top: 45%; left: 65%; } /* UAE */
-    .globe-dot-2 { top: 25%; left: 42%; } /* UK */
-    .globe-dot-2::before { background: var(--teal-500); }
-    .globe-dot-2::after { background: rgba(90, 122, 138, 0.3); }
-    .globe-dot-3 { top: 40%; left: 75%; } /* Pakistan */
-    .globe-dot-4 { top: 35%; left: 35%; } /* Portugal */
-    .globe-dot-4::before { background: var(--teal-500); }
-    .globe-dot-4::after { background: rgba(90, 122, 138, 0.3); }
-    .globe-dot-5 { top: 75%; left: 80%; } /* Australia */
+    .globe-dot-2 { top: 42%; left: 58%; } /* KSA */
+    .globe-dot-3 { top: 48%; left: 62%; } /* Qatar */
+    .globe-dot-4 { top: 50%; left: 68%; } /* Oman */
+    /* South Asia (primary color) */
+    .globe-dot-5 { top: 40%; left: 75%; } /* Pakistan */
+    .globe-dot-6 { top: 38%; left: 80%; } /* Nepal */
+    .globe-dot-7 { top: 52%; left: 78%; } /* Sri Lanka */
+    /* Europe (teal color) */
+    .globe-dot-8 { top: 25%; left: 42%; } /* UK */
+    .globe-dot-8::before { background: var(--teal-500); }
+    .globe-dot-8::after { background: rgba(90, 122, 138, 0.3); }
+    .globe-dot-9 { top: 35%; left: 35%; } /* Portugal */
+    .globe-dot-9::before { background: var(--teal-500); }
+    .globe-dot-9::after { background: rgba(90, 122, 138, 0.3); }
+    /* Oceania (teal color) */
+    .globe-dot-10 { top: 75%; left: 85%; } /* Australia */
+    .globe-dot-10::before { background: var(--teal-500); }
+    .globe-dot-10::after { background: rgba(90, 122, 138, 0.3); }
     /* Staggered animation delays */
-    .globe-dot-1::before, .globe-dot-1::after { animation-delay: 0s; }
-    .globe-dot-2::before, .globe-dot-2::after { animation-delay: 0.3s; }
-    .globe-dot-3::before, .globe-dot-3::after { animation-delay: 0.6s; }
-    .globe-dot-4::before, .globe-dot-4::after { animation-delay: 0.9s; }
-    .globe-dot-5::before, .globe-dot-5::after { animation-delay: 1.2s; }
+    .globe-dot-1::before, .globe-dot-1::after, .globe-dot-1 .dot-ring { animation-delay: 0s; }
+    .globe-dot-2::before, .globe-dot-2::after, .globe-dot-2 .dot-ring { animation-delay: 0.15s; }
+    .globe-dot-3::before, .globe-dot-3::after, .globe-dot-3 .dot-ring { animation-delay: 0.3s; }
+    .globe-dot-4::before, .globe-dot-4::after, .globe-dot-4 .dot-ring { animation-delay: 0.45s; }
+    .globe-dot-5::before, .globe-dot-5::after, .globe-dot-5 .dot-ring { animation-delay: 0.6s; }
+    .globe-dot-6::before, .globe-dot-6::after, .globe-dot-6 .dot-ring { animation-delay: 0.75s; }
+    .globe-dot-7::before, .globe-dot-7::after, .globe-dot-7 .dot-ring { animation-delay: 0.9s; }
+    .globe-dot-8::before, .globe-dot-8::after, .globe-dot-8 .dot-ring { animation-delay: 1.05s; }
+    .globe-dot-9::before, .globe-dot-9::after, .globe-dot-9 .dot-ring { animation-delay: 1.2s; }
+    .globe-dot-10::before, .globe-dot-10::after, .globe-dot-10 .dot-ring { animation-delay: 1.35s; }
+    /* Teal dot ring colors for Europe and Oceania */
+    .globe-dot-8 .dot-ring, .globe-dot-9 .dot-ring, .globe-dot-10 .dot-ring { border-color: rgba(90, 122, 138, 0.2); }
+    .globe-dot-8::before, .globe-dot-9::before, .globe-dot-10::before { box-shadow: 0 0 10px var(--teal-400), 0 0 20px rgba(90, 122, 138, 0.3); }
     /* Location tooltip */
     .globe-dot .dot-label {
       position: absolute;
@@ -863,6 +1042,47 @@
 
           <!-- Globe visualization with location dots -->
           <div class="globe-container">
+            <!-- Outer glow aura -->
+            <div class="globe-aura"></div>
+
+            <!-- Orbital rings -->
+            <div class="globe-orbit globe-orbit-1"></div>
+            <div class="globe-orbit globe-orbit-2"></div>
+
+            <!-- Orbiting particles -->
+            <div class="orbit-particle orbit-particle-1"></div>
+            <div class="orbit-particle orbit-particle-2"></div>
+            <div class="orbit-particle orbit-particle-3"></div>
+
+            <!-- Inner glow highlight -->
+            <div class="globe-inner-glow"></div>
+
+            <!-- Connection arcs between locations -->
+            <div class="globe-connections">
+              <svg viewBox="0 0 180 180">
+                <defs>
+                  <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color: #E07A7A; stop-opacity: 0"/>
+                    <stop offset="50%" style="stop-color: #E07A7A; stop-opacity: 1"/>
+                    <stop offset="100%" style="stop-color: #5A7A8A; stop-opacity: 0"/>
+                  </linearGradient>
+                  <linearGradient id="arcGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color: #5A7A8A; stop-opacity: 0"/>
+                    <stop offset="50%" style="stop-color: #5A7A8A; stop-opacity: 1"/>
+                    <stop offset="100%" style="stop-color: #E07A7A; stop-opacity: 0"/>
+                  </linearGradient>
+                </defs>
+                <!-- Arc from UK to UAE (Europe to GCC) -->
+                <path class="connection-arc connection-arc-1" d="M75 45 Q100 55 117 81" stroke-dasharray="100" />
+                <!-- Arc from UAE to Pakistan (GCC to South Asia) -->
+                <path class="connection-arc connection-arc-2" d="M117 81 Q125 65 135 72" stroke-dasharray="100" />
+                <!-- Arc from Pakistan to Australia (South Asia to Oceania) -->
+                <path class="connection-arc connection-arc-3" d="M135 72 Q155 110 153 135" stroke-dasharray="100" />
+                <!-- Arc from UK to Portugal (Europe) -->
+                <path class="connection-arc connection-arc-4" d="M75 45 Q55 55 63 63" stroke-dasharray="80" style="stroke: url(#arcGradient2);" />
+              </svg>
+            </div>
+
             <!-- Stylized Globe -->
             <svg class="globe-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
               <!-- Globe circle -->
@@ -877,20 +1097,48 @@
               <line x1="100" y1="20" x2="100" y2="180" stroke="var(--gray-200)" stroke-width="1"/>
             </svg>
 
-            <!-- Location markers around the globe -->
+            <!-- Location markers - GCC -->
             <div class="globe-dot globe-dot-1">
+              <span class="dot-ring"></span>
               <span class="dot-label">UAE</span>
             </div>
             <div class="globe-dot globe-dot-2">
-              <span class="dot-label">UK</span>
+              <span class="dot-ring"></span>
+              <span class="dot-label">KSA</span>
             </div>
             <div class="globe-dot globe-dot-3">
-              <span class="dot-label">Pakistan</span>
+              <span class="dot-ring"></span>
+              <span class="dot-label">Qatar</span>
             </div>
             <div class="globe-dot globe-dot-4">
+              <span class="dot-ring"></span>
+              <span class="dot-label">Oman</span>
+            </div>
+            <!-- Location markers - South Asia -->
+            <div class="globe-dot globe-dot-5">
+              <span class="dot-ring"></span>
+              <span class="dot-label">Pakistan</span>
+            </div>
+            <div class="globe-dot globe-dot-6">
+              <span class="dot-ring"></span>
+              <span class="dot-label">Nepal</span>
+            </div>
+            <div class="globe-dot globe-dot-7">
+              <span class="dot-ring"></span>
+              <span class="dot-label">Sri Lanka</span>
+            </div>
+            <!-- Location markers - Europe -->
+            <div class="globe-dot globe-dot-8">
+              <span class="dot-ring"></span>
+              <span class="dot-label">UK</span>
+            </div>
+            <div class="globe-dot globe-dot-9">
+              <span class="dot-ring"></span>
               <span class="dot-label">Portugal</span>
             </div>
-            <div class="globe-dot globe-dot-5">
+            <!-- Location markers - Oceania -->
+            <div class="globe-dot globe-dot-10">
+              <span class="dot-ring"></span>
               <span class="dot-label">Australia</span>
             </div>
           </div>
