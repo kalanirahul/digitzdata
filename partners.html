@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Partners | DD Consulting</title>
+  <meta name="description" content="DD Consulting partners with industry leaders including Flick Network for E-Invoicing and Arcanum for AI solutions to deliver best-in-class technology to our clients.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Partners Page Styles */
+    .partners-intro {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 60px;
+    }
+
+    .partners-intro p {
+      font-size: 17px;
+      color: var(--gray-600);
+      line-height: 1.8;
+    }
+
+    /* Partnership Section */
+    .partnership {
+      margin-bottom: 80px;
+    }
+
+    .partnership:last-child {
+      margin-bottom: 0;
+    }
+
+    .partnership-card {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 48px;
+      align-items: start;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 20px;
+      padding: 48px;
+      transition: all 0.4s ease;
+    }
+
+    .partnership-card:hover {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+      border-color: var(--gray-300);
+    }
+
+    /* Partner Logo Area */
+    .partner-logo-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 48px 32px;
+      border-radius: 16px;
+      min-height: 320px;
+    }
+
+    /* Flick Network - Exact brand color #464AA7 */
+    .partner-logo-area.flick {
+      background: linear-gradient(135deg, #464AA7 0%, #5459B8 50%, #383C8A 100%);
+    }
+
+    /* Arcanum - Exact brand color #9949AC */
+    .partner-logo-area.arcanum {
+      background: linear-gradient(135deg, #9949AC 0%, #AD5DC0 50%, #7D3A8E 100%);
+    }
+
+    .partnership-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 24px;
+      backdrop-filter: blur(4px);
+    }
+
+    .partnership-badge svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .partner-logo {
+      max-width: 200px;
+      max-height: 70px;
+      margin-bottom: 24px;
+    }
+
+    .partner-logo img {
+      width: 100%;
+      height: auto;
+      filter: brightness(0) invert(1);
+    }
+
+    .partner-tagline {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 240px;
+    }
+
+    .partner-website-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .partner-website-link:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--white);
+    }
+
+    .partner-website-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Partner Content */
+    .partner-content {
+      padding-top: 8px;
+    }
+
+    .partner-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary-600);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .partner-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--gray-900);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .partner-description {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    /* Benefits List */
+    .partner-benefits {
+      margin-bottom: 28px;
+    }
+
+    .partner-benefits-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--gray-700);
+      padding: 10px 12px;
+      background: var(--gray-50);
+      border-radius: 8px;
+      border-left: 3px solid var(--teal-500);
+      transition: all 0.2s ease;
+    }
+
+    .benefit-item:hover {
+      transform: translateX(4px);
+    }
+
+    /* Flick Network hover - brand color #464AA7 */
+    #e-invoicing .benefit-item {
+      border-left-color: #464AA7;
+    }
+    #e-invoicing .benefit-item svg {
+      color: #464AA7;
+    }
+    #e-invoicing .benefit-item:hover {
+      background: rgba(70, 74, 167, 0.08);
+      border-left-color: #464AA7;
+    }
+
+    /* Arcanum hover - brand color #9949AC */
+    #ai-solutions .benefit-item {
+      border-left-color: #9949AC;
+    }
+    #ai-solutions .benefit-item svg {
+      color: #9949AC;
+    }
+    #ai-solutions .benefit-item:hover {
+      background: rgba(153, 73, 172, 0.08);
+      border-left-color: #9949AC;
+    }
+
+    .benefit-item svg {
+      width: 14px;
+      height: 14px;
+      color: var(--teal-500);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Partner CTA */
+    .partner-cta {
+      display: inline-block;
+    }
+
+    .partner-cta .btn {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+
+    /* Why Partner Section */
+    .why-partner {
+      background: var(--gray-50);
+      padding: 80px 0;
+      margin-top: 60px;
+    }
+
+    .why-partner-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 40px;
+    }
+
+    .why-partner-item {
+      text-align: center;
+      padding: 28px;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--gray-200);
+      transition: all 0.3s ease;
+    }
+
+    .why-partner-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .why-partner-icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-100) 0%, var(--teal-100) 100%);
+      border-radius: 14px;
+    }
+
+    .why-partner-icon svg {
+      width: 26px;
+      height: 26px;
+      color: var(--primary-600);
+    }
+
+    .why-partner-item h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      color: var(--gray-900);
+      margin-bottom: 10px;
+    }
+
+    .why-partner-item p {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.65;
+    }
+
+    /* CTA Section */
+    .partners-cta {
+      background: linear-gradient(135deg, var(--gray-900) 0%, #1a1a2e 100%);
+      padding: 72px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .partners-cta::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(224, 122, 122, 0.15) 0%, transparent 60%);
+    }
+
+    .partners-cta-content {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .partners-cta h2 {
+      font-family: var(--font-display);
+      font-size: 32px;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .partners-cta p {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+
+    .partners-cta .btn {
+      background: var(--white);
+      color: var(--gray-900);
+      padding: 14px 28px;
+    }
+
+    .partners-cta .btn:hover {
+      background: var(--primary-50);
+      color: var(--primary-700);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .partnership-card {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .partner-logo-area {
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .why-partner-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .partnership-card {
+        padding: 28px;
+      }
+
+      .partner-title {
+        font-size: 24px;
+      }
+
+      .partners-cta h2 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="DD Logo.png" alt="DD Consulting" class="logo-img">
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav" id="mainNav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="practices.html" class="nav-link">Practices</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="partners.html" class="nav-link active">Partners</a>
+        <a href="industries.html" class="nav-link">Industries</a>
+        <a href="insights.html" class="nav-link">Insights</a>
+        <a href="training.html" class="nav-link">Training</a>
+        <a href="webinars.html" class="nav-link">Events</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="careers.html" class="nav-link">Careers</a>
+        <a href="contact.html" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-header page-header-partners">
+    <div class="container">
+      <p class="page-label">Our Partners</p>
+      <h1 class="page-title">Strategic partnerships, exceptional solutions</h1>
+      <p class="page-description">We partner with industry-leading technology providers to deliver best-in-class solutions that address your most complex challenges.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="partners-intro">
+        <div class="accent-line accent-line-center"></div>
+        <p>DD Consulting combines deep domain expertise with strategic technology partnerships to deliver comprehensive solutions. Our partners are carefully selected for their innovation, reliability, and alignment with our commitment to client success.</p>
+      </div>
+
+      <!-- Flick Network Partnership -->
+      <div class="partnership" id="e-invoicing">
+        <div class="partnership-card">
+          <div class="partner-logo-area flick">
+            <span class="partnership-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Official Partner
+            </span>
+            <div class="partner-logo">
+              <img src="https://www.flick.network/_next/static/media/flick_logo.89cdbd87.svg" alt="Flick Network">
+            </div>
+            <p class="partner-tagline">Pre-approved E-Invoicing solution provider for UAE FTA & Ministry of Finance</p>
+            <a href="https://www.flick.network" target="_blank" rel="noopener noreferrer" class="partner-website-link">
+              Visit flick.network
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+          <div class="partner-content">
+            <p class="partner-label">E-Invoicing Solutions</p>
+            <h2 class="partner-title">E-Invoicing for UAE & GCC</h2>
+            <p class="partner-description">We partner with Flick Network to bring market-leading E-Invoicing solutions to businesses across the UAE and GCC markets. Flick Network is a pre-approved e-invoicing solution provider recognised by the UAE Federal Tax Authority (FTA) and Ministry of Finance (MoF) — authorised to deliver fully compliant, automated e-invoicing that aligns with the UAE's digital invoicing mandate.</p>
+            <p class="partner-description">Our combined offering empowers organisations to digitise, automate, and simplify invoice generation and reporting, ensuring compliance with evolving regulatory requirements while enhancing operational efficiency.</p>
+
+            <div class="partner-benefits">
+              <p class="partner-benefits-title">Key Capabilities</p>
+              <div class="benefits-grid">
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>FTA & MoF compliant digital invoices</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Automated invoice creation & validation</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Real-time invoice tracking</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Secure data storage & management</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Seamless ERP integration</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Reduced errors & costs</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="partner-cta">
+              <a href="contact.html" class="btn btn-primary">Get Implementation Support</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arcanum/Numa Partnership -->
+      <div class="partnership" id="ai-solutions">
+        <div class="partnership-card">
+          <div class="partner-logo-area arcanum">
+            <span class="partnership-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              Exclusive Partner
+            </span>
+            <div class="partner-logo">
+              <img src="https://cdn.prod.website-files.com/655bafbc1621917aa044a7b8/66fde6363d8aed57e42e83b9_Arcanum%20Logo.svg" alt="Arcanum">
+            </div>
+            <p class="partner-tagline">Advanced AI solutions for enterprise data-driven decision making</p>
+            <a href="https://www.arcanum.ai" target="_blank" rel="noopener noreferrer" class="partner-website-link">
+              Visit arcanum.ai
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+          <div class="partner-content">
+            <p class="partner-label">AI Solutions</p>
+            <h2 class="partner-title">AI Solutions — Powered by Numa</h2>
+            <p class="partner-description">DD Consulting is an exclusive partner of Arcanum to bring Numa — a cutting-edge AI-driven platform — to insurance and enterprise clients across the GCC region. Numa by Arcanum is an advanced artificial intelligence solution designed to streamline data-driven decision-making, automate complex workflows, and unlock actionable insights from enterprise data.</p>
+            <p class="partner-description">Built for organisations that demand scalability, transparency, and impact, Numa transforms how businesses operate by harnessing the power of sophisticated AI without compromising on security or compliance.</p>
+
+            <div class="partner-benefits">
+              <p class="partner-benefits-title">What You Can Achieve</p>
+              <div class="benefits-grid">
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Automate operational processes</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Real-time insights from large datasets</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>AI-powered workflow acceleration</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Strengthen competitive advantage</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Seamless system integration</span>
+                </div>
+                <div class="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  <span>Compliant & secure deployment</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="partner-cta">
+              <a href="contact.html" class="btn btn-primary">Discuss Your AI Project</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Partner With Us -->
+  <section class="why-partner">
+    <div class="container">
+      <div class="section-header" style="text-align: center; max-width: 640px; margin: 0 auto;">
+        <div class="accent-line accent-line-center"></div>
+        <p class="section-label">Why DD Consulting</p>
+        <h2 class="section-title">Implementation expertise you can trust</h2>
+        <p class="section-description">Our partnership approach combines cutting-edge technology with deep domain knowledge to ensure successful outcomes.</p>
+      </div>
+      <div class="why-partner-grid">
+        <div class="why-partner-item">
+          <div class="why-partner-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Regional Expertise</h3>
+          <p>Deep understanding of GCC regulatory requirements and business practices ensures compliant, practical implementations.</p>
+        </div>
+        <div class="why-partner-item">
+          <div class="why-partner-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>End-to-End Support</h3>
+          <p>From initial assessment through go-live and beyond, we provide comprehensive support at every stage of your journey.</p>
+        </div>
+        <div class="why-partner-item">
+          <div class="why-partner-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3>Faster Time to Value</h3>
+          <p>Our proven implementation methodology ensures rapid deployment while minimising disruption to your operations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="partners-cta">
+    <div class="container">
+      <div class="partners-cta-content">
+        <h2>Ready to get started?</h2>
+        <p>Let's discuss how our partner solutions can help transform your business operations.</p>
+        <a href="contact.html" class="btn">Contact Us Today</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="DD Logo.png" alt="DD Consulting" class="footer-logo-img">
+          <p>A global advisory firm delivering solutions across actuarial science, accounting, ESG, and digital transformation.</p>
+          <div class="social-links">
+            <a href="https://ae.linkedin.com/company/dd-consulting-llc" target="_blank" class="social-link" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/consultantsuae/" target="_blank" class="social-link" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Practices</h4>
+          <div class="footer-links">
+            <a href="practices.html" class="footer-link">Actuarial Services</a>
+            <a href="practices.html" class="footer-link">Accounting & Finance</a>
+            <a href="practices.html" class="footer-link">ESG & Sustainability</a>
+            <a href="partners.html#e-invoicing" class="footer-link">E-Invoicing</a>
+            <a href="practices.html" class="footer-link">Technology</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Products</h4>
+          <div class="footer-links">
+            <a href="https://www.reserium.io" target="_blank" class="footer-link">Reserium</a>
+            <a href="products.html" class="footer-link">GLM Pricing Tool</a>
+            <a href="partners.html#ai-solutions" class="footer-link">AI Solutions</a>
+            <a href="products.html" class="footer-link">Motor Pricing Insights</a>
+            <a href="products.html" class="footer-link">Medical Pricing Insights</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <div class="footer-links">
+            <a href="about.html" class="footer-link">About Us</a>
+            <a href="partners.html" class="footer-link">Partners</a>
+            <a href="insights.html" class="footer-link">Insights</a>
+            <a href="careers.html" class="footer-link">Careers</a>
+            <a href="contact.html" class="footer-link">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 DD Consulting LLC. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    const navOverlay = document.getElementById('navOverlay');
+    const header = document.getElementById('header');
+
+    function toggleMenu() {
+      menuToggle.classList.toggle('active');
+      mainNav.classList.toggle('active');
+      navOverlay.classList.toggle('active');
+      document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    navOverlay.addEventListener('click', toggleMenu);
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { if (mainNav.classList.contains('active')) toggleMenu(); });
+    });
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
+  </script>
+
+</body>
+</html>

@@ -2276,6 +2276,40 @@ img {
   display: none;
 }
 
+/* Partners Page Header */
+.page-header-partners {
+  background-image:
+    linear-gradient(135deg, rgba(16, 24, 40, 0.9) 0%, rgba(51, 64, 208, 0.7) 50%, rgba(16, 24, 40, 0.85) 100%),
+    url('images/hero/partners-hero.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.page-header-partners .page-label,
+.page-header-partners .page-title,
+.page-header-partners .page-description {
+  color: var(--white);
+  background: none;
+  -webkit-text-fill-color: unset;
+}
+
+.page-header-partners .page-label::before {
+  background: linear-gradient(90deg, var(--primary-300), var(--teal-300));
+}
+
+.page-header-partners .page-title::after {
+  background: linear-gradient(90deg, var(--primary-400), var(--teal-400));
+}
+
+.page-header-partners .page-description {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.page-header-partners::before,
+.page-header-partners::after {
+  display: none;
+}
+
 /* =====================================================
    TRUSTED BY / CLIENT LOGOS SECTION
    ===================================================== */
