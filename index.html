@@ -134,17 +134,17 @@
       overflow: hidden;
       padding: 80px 0;
     }
-    /* Animated gradient background - MORE VISIBLE */
+    /* Animated gradient background - DD Brand Colors */
     .practices-animated-bg {
       position: absolute;
       inset: 0;
       z-index: 0;
       background: linear-gradient(135deg,
-        rgba(224, 122, 122, 0.15) 0%,
+        rgba(168, 74, 74, 0.1) 0%,
         rgba(248, 250, 252, 1) 20%,
-        rgba(45, 212, 191, 0.1) 40%,
+        rgba(90, 122, 138, 0.08) 40%,
         rgba(248, 250, 252, 1) 60%,
-        rgba(224, 122, 122, 0.12) 80%,
+        rgba(138, 61, 61, 0.08) 80%,
         rgba(248, 250, 252, 1) 100%);
       background-size: 300% 300%;
       animation: practicesGradientShift 8s ease infinite;
@@ -153,61 +153,20 @@
       0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
     }
-    /* Animated mesh grid - VISIBLE */
+    /* Animated mesh grid - DD Brand Colors */
     .practices-mesh {
       position: absolute;
       inset: 0;
       z-index: 1;
       background-image:
-        linear-gradient(rgba(224, 122, 122, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(224, 122, 122, 0.08) 1px, transparent 1px);
+        linear-gradient(rgba(90, 122, 138, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(90, 122, 138, 0.06) 1px, transparent 1px);
       background-size: 60px 60px;
       animation: practicesMeshMove 20s linear infinite;
     }
     @keyframes practicesMeshMove {
       0% { transform: translate(0, 0); }
       100% { transform: translate(60px, 60px); }
-    }
-    /* Large floating blobs - VERY VISIBLE */
-    .practices-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
-      z-index: 1;
-      animation: practicesBlobFloat 10s ease-in-out infinite;
-    }
-    .practices-blob-1 {
-      width: 500px;
-      height: 500px;
-      background: rgba(224, 122, 122, 0.25);
-      top: -150px;
-      left: -100px;
-      animation-delay: 0s;
-    }
-    .practices-blob-2 {
-      width: 400px;
-      height: 400px;
-      background: rgba(45, 212, 191, 0.2);
-      bottom: -100px;
-      right: -80px;
-      animation-delay: -3s;
-      animation-duration: 12s;
-    }
-    .practices-blob-3 {
-      width: 350px;
-      height: 350px;
-      background: rgba(224, 122, 122, 0.18);
-      top: 40%;
-      left: 50%;
-      transform: translateX(-50%);
-      animation-delay: -5s;
-      animation-duration: 14s;
-    }
-    @keyframes practicesBlobFloat {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      25% { transform: translate(30px, -20px) scale(1.05); }
-      50% { transform: translate(-20px, 30px) scale(0.95); }
-      75% { transform: translate(20px, 20px) scale(1.02); }
     }
     /* Flowing wave lines - MORE VISIBLE */
     .practices-waves {
@@ -227,11 +186,11 @@
       border-radius: 43%;
     }
     .practices-wave-1 {
-      border: 3px solid rgba(224, 122, 122, 0.15);
+      border: 3px solid rgba(168, 74, 74, 0.1);
       animation: practicesWaveRotate 20s linear infinite;
     }
     .practices-wave-2 {
-      border: 2px solid rgba(45, 212, 191, 0.12);
+      border: 2px solid rgba(90, 122, 138, 0.08);
       animation: practicesWaveRotate 25s linear infinite reverse;
       width: 180%;
       height: 180%;
@@ -239,7 +198,7 @@
       left: -40%;
     }
     .practices-wave-3 {
-      border: 2px solid rgba(224, 122, 122, 0.1);
+      border: 2px solid rgba(138, 61, 61, 0.06);
       animation: practicesWaveRotate 30s linear infinite;
       width: 160%;
       height: 160%;
@@ -261,18 +220,18 @@
     .practices-streak {
       position: absolute;
       width: 3px;
-      background: linear-gradient(180deg, transparent 0%, rgba(224, 122, 122, 0.6) 50%, transparent 100%);
-      animation: practicesStreakFall 6s linear infinite;
+      background: linear-gradient(180deg, transparent 0%, rgba(168, 74, 74, 0.4) 50%, transparent 100%);
+      animation: practicesStreakFall 14s linear infinite;
       border-radius: 2px;
     }
     .practices-streak:nth-child(1) { left: 8%; animation-delay: 0s; height: 150px; }
-    .practices-streak:nth-child(2) { left: 22%; animation-delay: -1.5s; height: 200px; }
-    .practices-streak:nth-child(3) { left: 38%; animation-delay: -3s; height: 120px; }
-    .practices-streak:nth-child(4) { left: 52%; animation-delay: -0.8s; height: 180px; }
-    .practices-streak:nth-child(5) { left: 68%; animation-delay: -4s; height: 160px; }
-    .practices-streak:nth-child(6) { left: 82%; animation-delay: -2.5s; height: 140px; }
-    .practices-streak:nth-child(7) { left: 15%; animation-delay: -5s; height: 130px; width: 2px; background: linear-gradient(180deg, transparent 0%, rgba(45, 212, 191, 0.5) 50%, transparent 100%); }
-    .practices-streak:nth-child(8) { left: 75%; animation-delay: -3.5s; height: 190px; width: 2px; background: linear-gradient(180deg, transparent 0%, rgba(45, 212, 191, 0.4) 50%, transparent 100%); }
+    .practices-streak:nth-child(2) { left: 22%; animation-delay: -3s; height: 200px; }
+    .practices-streak:nth-child(3) { left: 38%; animation-delay: -6s; height: 120px; }
+    .practices-streak:nth-child(4) { left: 52%; animation-delay: -1.5s; height: 180px; }
+    .practices-streak:nth-child(5) { left: 68%; animation-delay: -9s; height: 160px; }
+    .practices-streak:nth-child(6) { left: 82%; animation-delay: -5s; height: 140px; }
+    .practices-streak:nth-child(7) { left: 15%; animation-delay: -11s; height: 130px; width: 2px; background: linear-gradient(180deg, transparent 0%, rgba(90, 122, 138, 0.35) 50%, transparent 100%); }
+    .practices-streak:nth-child(8) { left: 75%; animation-delay: -7s; height: 190px; width: 2px; background: linear-gradient(180deg, transparent 0%, rgba(90, 122, 138, 0.28) 50%, transparent 100%); }
     @keyframes practicesStreakFall {
       0% { top: -250px; opacity: 0; }
       5% { opacity: 1; }
@@ -292,46 +251,12 @@
       border-radius: 50%;
       animation: practicesPulse 5s ease-in-out infinite;
     }
-    .practices-pulse:nth-child(1) { width: 400px; height: 400px; top: 5%; left: 0%; background: radial-gradient(circle, rgba(224, 122, 122, 0.3) 0%, transparent 60%); animation-delay: 0s; }
-    .practices-pulse:nth-child(2) { width: 350px; height: 350px; bottom: 10%; right: 5%; background: radial-gradient(circle, rgba(45, 212, 191, 0.25) 0%, transparent 60%); animation-delay: -1.5s; }
-    .practices-pulse:nth-child(3) { width: 300px; height: 300px; top: 45%; left: 35%; background: radial-gradient(circle, rgba(224, 122, 122, 0.2) 0%, transparent 60%); animation-delay: -3s; }
+    .practices-pulse:nth-child(1) { width: 400px; height: 400px; top: 5%; left: 0%; background: radial-gradient(circle, rgba(168, 74, 74, 0.18) 0%, transparent 60%); animation-delay: 0s; }
+    .practices-pulse:nth-child(2) { width: 350px; height: 350px; bottom: 10%; right: 5%; background: radial-gradient(circle, rgba(90, 122, 138, 0.16) 0%, transparent 60%); animation-delay: -1.5s; }
+    .practices-pulse:nth-child(3) { width: 300px; height: 300px; top: 45%; left: 35%; background: radial-gradient(circle, rgba(138, 61, 61, 0.14) 0%, transparent 60%); animation-delay: -3s; }
     @keyframes practicesPulse {
       0%, 100% { transform: scale(0.9); opacity: 0.5; }
       50% { transform: scale(1.3); opacity: 1; }
-    }
-    /* Floating particles - LARGER & MORE VISIBLE */
-    .practices-particles {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 3;
-    }
-    .practices-particle {
-      position: absolute;
-      border-radius: 50%;
-      animation: particleFloat 8s ease-in-out infinite;
-    }
-    /* Coral particles - BIGGER */
-    .practices-particle:nth-child(1) { width: 12px; height: 12px; background: rgba(224, 122, 122, 0.6); left: 8%; top: 20%; animation-delay: 0s; animation-duration: 10s; box-shadow: 0 0 20px rgba(224, 122, 122, 0.4); }
-    .practices-particle:nth-child(2) { width: 16px; height: 16px; background: rgba(224, 122, 122, 0.5); left: 18%; top: 55%; animation-delay: -2s; animation-duration: 12s; box-shadow: 0 0 25px rgba(224, 122, 122, 0.3); }
-    .practices-particle:nth-child(3) { width: 8px; height: 8px; background: rgba(224, 122, 122, 0.7); left: 32%; top: 35%; animation-delay: -4s; animation-duration: 9s; box-shadow: 0 0 15px rgba(224, 122, 122, 0.5); }
-    .practices-particle:nth-child(4) { width: 14px; height: 14px; background: rgba(224, 122, 122, 0.55); left: 48%; top: 70%; animation-delay: -1s; animation-duration: 11s; box-shadow: 0 0 22px rgba(224, 122, 122, 0.35); }
-    .practices-particle:nth-child(5) { width: 10px; height: 10px; background: rgba(224, 122, 122, 0.65); left: 62%; top: 22%; animation-delay: -3s; animation-duration: 13s; box-shadow: 0 0 18px rgba(224, 122, 122, 0.45); }
-    .practices-particle:nth-child(6) { width: 18px; height: 18px; background: rgba(224, 122, 122, 0.45); left: 78%; top: 58%; animation-delay: -5s; animation-duration: 8s; box-shadow: 0 0 28px rgba(224, 122, 122, 0.3); }
-    /* Teal particles */
-    .practices-particle:nth-child(7) { width: 14px; height: 14px; background: rgba(45, 212, 191, 0.5); left: 88%; top: 38%; animation-delay: -2.5s; animation-duration: 10s; box-shadow: 0 0 22px rgba(45, 212, 191, 0.4); }
-    .practices-particle:nth-child(8) { width: 10px; height: 10px; background: rgba(45, 212, 191, 0.6); left: 95%; top: 72%; animation-delay: -4.5s; animation-duration: 12s; box-shadow: 0 0 18px rgba(45, 212, 191, 0.5); }
-    .practices-particle:nth-child(9) { width: 8px; height: 8px; background: rgba(45, 212, 191, 0.55); left: 5%; top: 80%; animation-delay: -1.5s; animation-duration: 11s; box-shadow: 0 0 15px rgba(45, 212, 191, 0.45); }
-    .practices-particle:nth-child(10) { width: 16px; height: 16px; background: rgba(45, 212, 191, 0.45); left: 42%; top: 15%; animation-delay: -3.5s; animation-duration: 14s; box-shadow: 0 0 25px rgba(45, 212, 191, 0.35); }
-    /* Bright sparkle particles */
-    .practices-particle:nth-child(11) { width: 6px; height: 6px; background: #fff; left: 25%; top: 45%; animation-delay: -0.5s; animation-duration: 7s; box-shadow: 0 0 12px rgba(224, 122, 122, 0.8), 0 0 24px rgba(224, 122, 122, 0.4); }
-    .practices-particle:nth-child(12) { width: 6px; height: 6px; background: #fff; left: 72%; top: 28%; animation-delay: -2.8s; animation-duration: 9s; box-shadow: 0 0 12px rgba(45, 212, 191, 0.8), 0 0 24px rgba(45, 212, 191, 0.4); }
-    @keyframes particleFloat {
-      0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.4; }
-      25% { transform: translateY(-25px) translateX(10px) scale(1.3); opacity: 0.9; }
-      50% { transform: translateY(-15px) translateX(-5px) scale(0.9); opacity: 0.5; }
-      75% { transform: translateY(-30px) translateX(8px) scale(1.15); opacity: 0.75; }
     }
     .practices-header {
       text-align: center;
@@ -660,13 +585,9 @@
       .practices-mesh {
         display: none;
       }
-      .practices-pulse,
-      .practices-blob {
+      .practices-pulse {
         animation: none;
         opacity: 0.2;
-      }
-      .practices-blob {
-        filter: blur(80px);
       }
     }
   </style>
@@ -676,11 +597,6 @@
 
     <!-- Animated mesh grid -->
     <div class="practices-mesh"></div>
-
-    <!-- Large floating blobs -->
-    <div class="practices-blob practices-blob-1"></div>
-    <div class="practices-blob practices-blob-2"></div>
-    <div class="practices-blob practices-blob-3"></div>
 
     <!-- Rotating wave rings -->
     <div class="practices-waves">
@@ -706,22 +622,6 @@
       <div class="practices-pulse"></div>
       <div class="practices-pulse"></div>
       <div class="practices-pulse"></div>
-    </div>
-
-    <!-- Floating particles -->
-    <div class="practices-particles">
-      <div class="practices-particle"></div>
-      <div class="practices-particle"></div>
-      <div class="practices-particle"></div>
-      <div class="practices-particle"></div>
-      <div class="practices-particle"></div>
-      <div class="practices-particle"></div>
-      <div class="practices-particle"></div>
-      <div class="practices-particle"></div>
-      <div class="practices-particle"></div>
-      <div class="practices-particle"></div>
-      <div class="practices-particle"></div>
-      <div class="practices-particle"></div>
     </div>
 
     <div class="container practices-header">
