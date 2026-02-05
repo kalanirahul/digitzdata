@@ -1011,16 +1011,16 @@
       // Render compact ticker at top
       renderEventsTicker(upcoming);
 
-      // Render featured (first upcoming)
+      // Render featured (use featured column, fallback to first upcoming)
       const featuredContainer = document.getElementById('featuredWebinar');
-      if (upcoming.length > 0) {
-        const featured = upcoming[0];
+      const featured = upcoming.find(w => w.featured === 'true' || w.featured === true) || upcoming[0];
+      if (featured) {
         featuredContainer.innerHTML = renderFeaturedWebinar(featured);
       }
 
       // Render upcoming (excluding featured)
       const upcomingContainer = document.getElementById('upcomingWebinars');
-      const remainingUpcoming = upcoming.slice(1);
+      const remainingUpcoming = upcoming.filter(w => w !== featured);
       if (remainingUpcoming.length > 0) {
         upcomingContainer.innerHTML = remainingUpcoming.map(w => renderWebinarCard(w)).join('');
       } else if (upcoming.length <= 1) {
@@ -1073,7 +1073,7 @@
         const time = webinar.time || '2:00 PM GMT';
 
         return `
-          <a href="${webinar.registerLink || '#featuredWebinar'}" class="ticker-item">
+          <a href="event.html?title=${encodeURIComponent(webinar.title)}" class="ticker-item">
             <div class="ticker-date">
               <span class="ticker-date-month">${month}</span>
               <span class="ticker-date-day">${day}</span>
@@ -1155,7 +1155,7 @@
           </span>
           <div class="featured-webinar-content">
             <div class="featured-webinar-info">
-              <h2>${webinar.title}</h2>
+              <h2><a href="event.html?title=${encodeURIComponent(webinar.title)}" style="color: inherit; text-decoration: none;">${webinar.title}</a></h2>
               <div class="featured-webinar-meta">
                 <span class="featured-webinar-meta-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1185,7 +1185,10 @@
                 <div class="month">${month}</div>
                 <div class="year">${year}</div>
               </div>
-              <a href="${webinar.registerLink || '#'}" class="btn btn-primary btn-lg">
+              <a href="event.html?title=${encodeURIComponent(webinar.title)}" class="btn btn-outline btn-lg" style="margin-bottom: 8px;">
+                View Details
+              </a>
+              <a href="${webinar.registerLink || '#'}" class="btn btn-primary btn-lg" ${webinar.registerLink ? 'target="_blank"' : ''}>
                 Register Now
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
@@ -1225,7 +1228,7 @@
             </div>
             <span class="webinar-status ${status}">${status}</span>
           </div>
-          <h3>${webinar.title}</h3>
+          <h3><a href="event.html?title=${encodeURIComponent(webinar.title)}" style="color: inherit; text-decoration: none;">${webinar.title}</a></h3>
           <div class="webinar-card-meta">
             <span class="webinar-card-meta-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1247,8 +1250,8 @@
             <div class="webinar-card-speakers">
               ${speakerBadges}
             </div>
-            <a href="${isPast ? (webinar.recordingLink || 'contact.html') : (webinar.registerLink || 'contact.html')}" class="btn btn-outline btn-sm">
-              ${isPast ? 'Request Recording' : 'Register'}
+            <a href="event.html?title=${encodeURIComponent(webinar.title)}" class="btn btn-outline btn-sm">
+              View Details
             </a>
           </div>
         </div>
