@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | DD Consulting</title>
+  <link rel="icon" type="image/png" href="/DD Logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script>
+    // Auto-redirect old Squarespace URLs to new pages
+    (function() {
+      var path = window.location.pathname.replace(/\/$/, '').toLowerCase();
+      var redirects = {
+        '/about': '/about.html',
+        '/about-us': '/about.html',
+        '/contact': '/contact.html',
+        '/contact-us': '/contact.html',
+        '/services': '/practices.html',
+        '/practices': '/practices.html',
+        '/products': '/products.html',
+        '/partners': '/partners.html',
+        '/industries': '/industries.html',
+        '/insights': '/insights.html',
+        '/blog': '/insights.html',
+        '/training': '/training.html',
+        '/courses': '/training.html',
+        '/webinars': '/webinars.html',
+        '/events': '/webinars.html',
+        '/careers': '/careers.html',
+        '/jobs': '/careers.html',
+        '/privacy': '/privacy-policy.html',
+        '/privacy-policy': '/privacy-policy.html',
+        '/home': '/',
+        '/index': '/'
+      };
+      if (redirects[path]) {
+        window.location.replace(redirects[path]);
+      }
+    })();
+  </script>
+  <style>
+    .error-page {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .error-content {
+      max-width: 500px;
+    }
+    .error-code {
+      font-family: var(--font-display);
+      font-size: 120px;
+      font-weight: 400;
+      color: var(--primary-200);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .error-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
+    .error-message {
+      font-size: 16px;
+      color: var(--gray-500);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .error-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    .error-links a {
+      padding: 8px 16px;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--gray-600);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .error-links a:hover {
+      background: var(--primary-50);
+      border-color: var(--primary-200);
+      color: var(--primary-700);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <img src="/DD Logo.png" alt="DD Consulting" class="logo-img">
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav" id="mainNav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/practices.html" class="nav-link">Practices</a>
+        <a href="/products.html" class="nav-link">Products</a>
+        <a href="/partners.html" class="nav-link">Partners</a>
+        <a href="/industries.html" class="nav-link">Industries</a>
+        <a href="/insights.html" class="nav-link">Insights</a>
+        <a href="/training.html" class="nav-link">Training</a>
+        <a href="/webinars.html" class="nav-link">Events</a>
+        <a href="/about.html" class="nav-link">About Us</a>
+        <a href="/careers.html" class="nav-link">Careers</a>
+        <a href="/contact.html" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="error-page">
+    <div class="error-content">
+      <div class="error-code">404</div>
+      <h1 class="error-title">Page not found</h1>
+      <p class="error-message">The page you're looking for may have moved or no longer exists. We recently updated our website — try one of the links below.</p>
+      <a href="/" class="btn btn-primary">Go to Homepage</a>
+      <div class="error-links">
+        <a href="/practices.html">Practices</a>
+        <a href="/products.html">Products</a>
+        <a href="/training.html">Training</a>
+        <a href="/webinars.html">Events</a>
+        <a href="/about.html">About Us</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>&copy; 2025 DD Consulting LLC. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    const navOverlay = document.getElementById('navOverlay');
+    const header = document.getElementById('header');
+    function toggleMenu() {
+      menuToggle.classList.toggle('active');
+      mainNav.classList.toggle('active');
+      navOverlay.classList.toggle('active');
+      document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+    }
+    menuToggle.addEventListener('click', toggleMenu);
+    navOverlay.addEventListener('click', toggleMenu);
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
+  </script>
+
+</body>
+</html>
