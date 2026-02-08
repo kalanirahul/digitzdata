@@ -214,18 +214,12 @@
       width: 100%;
       height: 4px;
       background: linear-gradient(90deg, var(--primary-500), var(--teal-500));
-      transform: scaleX(0);
-      transition: transform 0.4s ease;
     }
 
     .webinar-card:hover {
-      border-color: var(--gray-300);
-      box-shadow: 0 16px 40px rgba(224, 122, 122, 0.1);
+      border-color: var(--primary-200);
+      box-shadow: 0 16px 40px rgba(224, 122, 122, 0.12);
       transform: translateY(-4px);
-    }
-
-    .webinar-card:hover::before {
-      transform: scaleX(1);
     }
 
     .webinar-card-header {
@@ -236,24 +230,25 @@
     }
 
     .webinar-card-date {
-      background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 100%);
-      border-radius: 10px;
-      padding: 12px 16px;
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+      border-radius: 12px;
+      padding: 14px 18px;
       text-align: center;
-      min-width: 70px;
+      min-width: 72px;
+      box-shadow: 0 4px 14px rgba(224, 122, 122, 0.25);
     }
 
     .webinar-card-date .day {
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 700;
-      color: var(--primary-600);
+      color: var(--white);
       line-height: 1;
     }
 
     .webinar-card-date .month {
       font-size: 11px;
       font-weight: 600;
-      color: var(--primary-500);
+      color: rgba(255, 255, 255, 0.85);
       text-transform: uppercase;
     }
 
@@ -289,6 +284,10 @@
       line-height: 1.4;
     }
 
+    .webinar-card h3 a:hover {
+      color: var(--primary-600) !important;
+    }
+
     .webinar-card-meta {
       display: flex;
       flex-wrap: wrap;
@@ -307,7 +306,7 @@
     .webinar-card-meta-item svg {
       width: 14px;
       height: 14px;
-      stroke: var(--gray-400);
+      stroke: var(--primary-400);
     }
 
     .webinar-card-description {
@@ -332,20 +331,21 @@
       flex: 1;
     }
 
+
     .speaker-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 6px 12px;
-      background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
-      border: 1px solid var(--gray-200);
+      background: linear-gradient(135deg, var(--primary-50) 0%, rgba(254, 243, 242, 0.5) 100%);
+      border: 1px solid var(--primary-100);
       border-radius: 100px;
       font-size: 12px;
       transition: all 0.2s ease;
     }
 
     .speaker-badge:hover {
-      background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 100%);
+      background: linear-gradient(135deg, var(--primary-100) 0%, var(--primary-50) 100%);
       border-color: var(--primary-200);
     }
 
@@ -353,13 +353,13 @@
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--teal-100) 0%, var(--teal-200) 100%);
+      background: linear-gradient(135deg, var(--primary-400) 0%, var(--teal-400) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 10px;
       font-weight: 600;
-      color: var(--teal-700);
+      color: var(--white);
     }
 
     .speaker-badge-info {
@@ -424,6 +424,51 @@
     .webinars-empty p {
       font-size: 15px;
       color: var(--gray-500);
+    }
+
+    /* Upcoming Webinars Background Section */
+    .upcoming-section {
+      position: relative;
+      padding: 80px 0;
+      background: linear-gradient(135deg, #fdf2f2 0%, #fef8f4 40%, #f0f7fa 100%);
+      overflow: hidden;
+    }
+
+    .upcoming-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        radial-gradient(circle at 15% 25%, rgba(224, 122, 122, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 85% 75%, rgba(56, 178, 172, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 10%, rgba(224, 122, 122, 0.04) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .upcoming-section::after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gray-200), transparent);
+    }
+
+    .upcoming-section .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .upcoming-section .webinar-card {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .upcoming-section .webinar-card:hover {
+      box-shadow: 0 16px 40px rgba(224, 122, 122, 0.15);
     }
 
     /* Past Webinars Section */
@@ -804,6 +849,10 @@
       .webinar-card {
         padding: 24px;
       }
+
+      .upcoming-section {
+        padding: 48px 0;
+      }
     }
   </style>
 </head>
@@ -870,7 +919,12 @@
       <!-- Featured Webinar (loaded dynamically) -->
       <div id="featuredWebinar"></div>
 
-      <!-- Upcoming Webinars Grid -->
+    </div>
+  </section>
+
+  <!-- Upcoming Webinars — colored background -->
+  <section class="upcoming-section">
+    <div class="container">
       <div class="webinars-intro">
         <p class="section-label">Upcoming Sessions</p>
         <h2 class="section-title">Register for upcoming webinars</h2>
@@ -883,7 +937,11 @@
           <p>Loading webinars...</p>
         </div>
       </div>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="container">
       <!-- Past Webinars -->
       <div class="past-webinars-section">
         <div class="past-webinars-header">
