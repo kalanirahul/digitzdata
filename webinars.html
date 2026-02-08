@@ -629,7 +629,7 @@
     .ticker-track {
       display: flex;
       gap: 20px;
-      animation: tickerScrollCompact 25s linear infinite;
+      animation: tickerScrollCompact 45s linear infinite;
       width: max-content;
     }
 
@@ -991,6 +991,11 @@
     });
     window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
 
+    function toSlug(str) {
+      if (!str) return '';
+      return str.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    }
+
     // Load webinars from Google Sheets
     document.addEventListener('DOMContentLoaded', async () => {
       try {
@@ -1073,7 +1078,7 @@
         const time = webinar.time || '2:00 PM GMT';
 
         return `
-          <a href="event.html?title=${encodeURIComponent(webinar.title)}" class="ticker-item">
+          <a href="event.html?event=${toSlug(webinar.title)}" class="ticker-item">
             <div class="ticker-date">
               <span class="ticker-date-month">${month}</span>
               <span class="ticker-date-day">${day}</span>
@@ -1155,7 +1160,7 @@
           </span>
           <div class="featured-webinar-content">
             <div class="featured-webinar-info">
-              <h2><a href="event.html?title=${encodeURIComponent(webinar.title)}" style="color: inherit; text-decoration: none;">${webinar.title}</a></h2>
+              <h2><a href="event.html?event=${toSlug(webinar.title)}" style="color: inherit; text-decoration: none;">${webinar.title}</a></h2>
               <div class="featured-webinar-meta">
                 <span class="featured-webinar-meta-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1185,7 +1190,7 @@
                 <div class="month">${month}</div>
                 <div class="year">${year}</div>
               </div>
-              <a href="event.html?title=${encodeURIComponent(webinar.title)}" class="btn btn-outline btn-lg" style="margin-bottom: 8px;">
+              <a href="event.html?event=${toSlug(webinar.title)}" class="btn btn-outline btn-lg" style="margin-bottom: 8px;">
                 View Details
               </a>
               <a href="${webinar.registerLink || '#'}" class="btn btn-primary btn-lg" ${webinar.registerLink ? 'target="_blank"' : ''}>
@@ -1228,7 +1233,7 @@
             </div>
             <span class="webinar-status ${status}">${status}</span>
           </div>
-          <h3><a href="event.html?title=${encodeURIComponent(webinar.title)}" style="color: inherit; text-decoration: none;">${webinar.title}</a></h3>
+          <h3><a href="event.html?event=${toSlug(webinar.title)}" style="color: inherit; text-decoration: none;">${webinar.title}</a></h3>
           <div class="webinar-card-meta">
             <span class="webinar-card-meta-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1250,7 +1255,7 @@
             <div class="webinar-card-speakers">
               ${speakerBadges}
             </div>
-            <a href="event.html?title=${encodeURIComponent(webinar.title)}" class="btn btn-outline btn-sm">
+            <a href="event.html?event=${toSlug(webinar.title)}" class="btn btn-outline btn-sm">
               View Details
             </a>
           </div>

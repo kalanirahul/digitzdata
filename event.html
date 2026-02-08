@@ -306,38 +306,112 @@
     /* Speakers */
     .speakers-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 24px;
     }
 
     .event-speaker-card {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 16px;
-      padding: 24px;
+      text-align: center;
+      padding: 28px 20px;
       background: var(--white);
       border: 1px solid var(--gray-200);
-      border-radius: 12px;
+      border-radius: 16px;
       transition: all 0.3s ease;
     }
 
     .event-speaker-card:hover {
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
     }
 
     .event-speaker-avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
+      width: 140px;
+      height: 170px;
+      border-radius: 12px;
       background: linear-gradient(135deg, var(--primary-100) 0%, var(--teal-100) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 28px;
       font-weight: 600;
       color: var(--primary-600);
       flex-shrink: 0;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .event-speaker-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* Hero two-column layout */
+    .event-hero-layout {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .event-hero-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .event-hero-photos {
+      display: flex;
+      flex-direction: row;
+      gap: 28px;
+      flex-shrink: 0;
+    }
+
+    .hero-speaker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-speaker-photo {
+      width: 160px;
+      height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 3px solid rgba(255, 255, 255, 0.25);
+      flex-shrink: 0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      margin-bottom: 14px;
+    }
+
+    .hero-speaker-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .hero-speaker-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-speaker-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .hero-speaker-role {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 180px;
+      line-height: 1.4;
     }
 
     .event-speaker-name {
@@ -686,6 +760,23 @@
 
     /* Responsive */
     @media (max-width: 968px) {
+      .event-hero-layout {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 28px;
+      }
+
+      .event-hero-photos {
+        flex-direction: row;
+        gap: 20px;
+        align-self: center;
+      }
+
+      .hero-speaker-photo {
+        width: 120px;
+        height: 150px;
+      }
+
       .event-layout {
         grid-template-columns: 1fr;
       }
@@ -757,14 +848,19 @@
   <!-- Page Header -->
   <section class="page-header page-header-webinars" id="eventHero">
     <div class="container">
-      <div class="event-breadcrumb">
-        <a href="webinars.html">Events</a>
-        <span class="separator">/</span>
-        <span id="breadcrumbTitle">Event Details</span>
+      <div class="event-hero-layout">
+        <div class="event-hero-text">
+          <div class="event-breadcrumb">
+            <a href="webinars.html">Events</a>
+            <span class="separator">/</span>
+            <span id="breadcrumbTitle">Event Details</span>
+          </div>
+          <div id="eventTypeBadge"></div>
+          <h1 class="page-title" id="eventTitle">Loading...</h1>
+          <div class="event-hero-meta" id="eventHeroMeta"></div>
+        </div>
+        <div class="event-hero-photos" id="eventHeroPhotos"></div>
       </div>
-      <div id="eventTypeBadge"></div>
-      <h1 class="page-title" id="eventTitle">Loading...</h1>
-      <div class="event-hero-meta" id="eventHeroMeta"></div>
     </div>
   </section>
 
@@ -877,20 +973,25 @@
     // EVENT DETAIL PAGE LOGIC
     // ============================================
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const eventTitle = urlParams.get('title');
+    function toSlug(str) {
+      if (!str) return '';
+      return str.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    }
 
-    if (!eventTitle) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventSlug = urlParams.get('event') || urlParams.get('title');
+
+    if (!eventSlug) {
       showNotFound();
     }
 
     document.addEventListener('DOMContentLoaded', async () => {
-      if (!eventTitle) return;
+      if (!eventSlug) return;
 
       try {
         const webinars = await DataLoader.loadWebinars();
-        const decodedTitle = decodeURIComponent(eventTitle).trim().toLowerCase();
-        const event = webinars.find(w => w.title && w.title.trim().toLowerCase() === decodedTitle);
+        const slug = decodeURIComponent(eventSlug).trim().toLowerCase();
+        const event = webinars.find(w => w.title && (toSlug(w.title) === slug || w.title.trim().toLowerCase() === slug));
 
         if (!event) {
           showNotFound();
@@ -973,6 +1074,26 @@
         `);
       }
       document.getElementById('eventHeroMeta').innerHTML = heroMeta.join('');
+
+      // Add speaker photos to hero right side
+      const heroPhotosContainer = document.getElementById('eventHeroPhotos');
+      const speakersWithPhotos = speakers.filter(s => getSpeakerPhoto(s.name));
+      if (speakersWithPhotos.length > 0) {
+        heroPhotosContainer.innerHTML = speakers.map(s => {
+          const photo = getSpeakerPhoto(s.name);
+          return photo ? `
+            <div class="hero-speaker">
+              <div class="hero-speaker-photo">
+                <img src="${photo}" alt="${s.name}">
+              </div>
+              <div class="hero-speaker-info">
+                <span class="hero-speaker-name">${s.name}</span>
+                <span class="hero-speaker-role">${s.role}</span>
+              </div>
+            </div>
+          ` : '';
+        }).join('');
+      }
 
       // Build main content
       let mainHtml = '';
@@ -1070,11 +1191,9 @@
             <div class="speakers-grid">
               ${speakers.map(s => `
                 <div class="event-speaker-card">
-                  <div class="event-speaker-avatar">${getInitials(s.name)}</div>
-                  <div>
-                    <div class="event-speaker-name">${s.name}</div>
-                    <div class="event-speaker-role">${s.role}</div>
-                  </div>
+                  <div class="event-speaker-avatar">${speakerAvatarHtml(s.name)}</div>
+                  <div class="event-speaker-name">${s.name}</div>
+                  <div class="event-speaker-role">${s.role}</div>
                 </div>
               `).join('')}
             </div>
@@ -1194,7 +1313,7 @@
               const day = date.getDate();
               const month = date.toLocaleString('default', { month: 'short' });
               return `
-                <a href="event.html?title=${encodeURIComponent(w.title)}" class="related-card">
+                <a href="event.html?event=${toSlug(w.title)}" class="related-card">
                   <div class="related-card-header">
                     <div class="related-card-date">
                       <div class="day">${day}</div>
@@ -1229,6 +1348,27 @@
     function getInitials(name) {
       if (!name) return '?';
       return name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    }
+
+    // Map speaker first name to photo in images/webinar/
+    const speakerPhotos = {
+      'husain': 'images/webinar/Husain.jpeg',
+      'hussain': 'images/webinar/Husain.jpeg',
+      'jayson': 'images/webinar/Jayson.jpg'
+    };
+
+    function getSpeakerPhoto(name) {
+      if (!name) return null;
+      const firstName = name.split(' ')[0].toLowerCase();
+      return speakerPhotos[firstName] || null;
+    }
+
+    function speakerAvatarHtml(name) {
+      const photo = getSpeakerPhoto(name);
+      if (photo) {
+        return `<img src="${photo}" alt="${name}">`;
+      }
+      return getInitials(name);
     }
 
     function showNotFound() {
