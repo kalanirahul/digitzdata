@@ -471,6 +471,39 @@
       box-shadow: 0 16px 40px rgba(224, 122, 122, 0.15);
     }
 
+    /* Expectations Count Badge */
+    .exp-count-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      margin-top: 14px;
+      background: linear-gradient(135deg, #fef2f2, #faf5ff);
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--primary-600);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .exp-count-badge:hover {
+      background: linear-gradient(135deg, #fee2e2, #f3e8ff);
+      transform: translateX(2px);
+    }
+
+    .exp-count-badge svg {
+      stroke: var(--primary-500);
+      flex-shrink: 0;
+    }
+
+    .exp-count-num {
+      font-weight: 700;
+    }
+
+    .exp-count-text {
+      color: var(--gray-500);
+    }
+
     /* Past Webinars Section */
     .past-webinars-section {
       margin-top: 80px;
@@ -1257,6 +1290,11 @@
               </a>
             </div>
           </div>
+          <a href="respond.html?event=${toSlug(webinar.title)}" class="exp-count-badge" data-event-id="${toSlug(webinar.title)}" style="display:none; margin-top: 20px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span class="exp-count-num"></span>
+            <span class="exp-count-text">shared expectations</span>
+          </a>
         </div>
       `;
     }
@@ -1317,6 +1355,11 @@
               View Details
             </a>
           </div>
+          <a href="respond.html?event=${toSlug(webinar.title)}" class="exp-count-badge" data-event-id="${toSlug(webinar.title)}" style="display:none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span class="exp-count-num"></span>
+            <span class="exp-count-text">shared expectations</span>
+          </a>
         </div>
       `;
     }
@@ -1364,6 +1407,67 @@
       // Remove the query parameter from URL
       window.history.replaceState({}, document.title, window.location.pathname);
     }
+  </script>
+
+  <!-- Firebase SDK for expectations count -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script>
+    // Init Firebase (same config as event.html)
+    firebase.initializeApp({
+      apiKey: "AIzaSyDyZwl08LB5BkYQUckJLmjh9ErGehZxJ8o",
+      authDomain: "dd-consulting-llc.firebaseapp.com",
+      projectId: "dd-consulting-llc",
+      storageBucket: "dd-consulting-llc.firebasestorage.app",
+      messagingSenderId: "251995082210",
+      appId: "1:251995082210:web:e797d8e59a92f337407dbb"
+    });
+
+    // Fetch expectations counts for all event badges on the page
+    function loadExpectationsCounts() {
+      const badges = document.querySelectorAll('.exp-count-badge');
+      if (badges.length === 0) return;
+
+      const db = firebase.firestore();
+
+      badges.forEach(badge => {
+        const eventId = badge.dataset.eventId;
+        if (!eventId) return;
+
+        db.collection('event_expectations')
+          .where('eventId', '==', eventId)
+          .get()
+          .then(snapshot => {
+            const count = snapshot.size;
+            if (count > 0) {
+              badge.querySelector('.exp-count-num').textContent = count;
+              badge.querySelector('.exp-count-text').textContent =
+                count === 1 ? 'person shared expectations' : 'people shared expectations';
+              badge.style.display = 'flex';
+            }
+          })
+          .catch(err => console.warn('Count fetch error:', err));
+      });
+    }
+
+    // Wait for cards to render then load counts
+    function waitForCardsAndLoad() {
+      const badges = document.querySelectorAll('.exp-count-badge');
+      if (badges.length > 0) {
+        loadExpectationsCounts();
+      } else {
+        // Cards not yet rendered — watch for them
+        const observer = new MutationObserver(() => {
+          const b = document.querySelectorAll('.exp-count-badge');
+          if (b.length > 0) {
+            observer.disconnect();
+            loadExpectationsCounts();
+          }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+      }
+    }
+    waitForCardsAndLoad();
   </script>
 
 </body>

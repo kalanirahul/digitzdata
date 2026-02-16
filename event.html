@@ -758,6 +758,140 @@
       margin-bottom: 24px;
     }
 
+    /* ============================
+       Expectations CTA Card
+       ============================ */
+    .exp-cta-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      background: linear-gradient(135deg, #fdf2f2 0%, #fef8f4 40%, #f0f7fa 100%);
+      border: 1px solid var(--primary-100);
+      border-radius: 16px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .exp-cta-card:hover {
+      border-color: var(--primary-200);
+      box-shadow: 0 8px 28px rgba(224, 122, 122, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .exp-cta-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .exp-cta-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: white;
+    }
+
+    .exp-cta-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .exp-cta-content h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 3px;
+    }
+
+    .exp-cta-content p {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.4;
+    }
+
+    .exp-cta-arrow {
+      flex-shrink: 0;
+    }
+
+    .exp-cta-arrow svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--primary-400);
+      transition: transform 0.2s;
+    }
+
+    .exp-cta-card:hover .exp-cta-arrow svg {
+      transform: translateX(4px);
+    }
+
+    /* Sidebar Expectations CTA */
+    .sidebar-expectations-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      margin-top: 24px;
+      background: linear-gradient(135deg, var(--primary-50), rgba(240, 244, 246, 0.6));
+      border: 1px solid var(--primary-100);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-expectations-cta:hover {
+      border-color: var(--primary-200);
+      box-shadow: 0 4px 16px rgba(224, 122, 122, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .sidebar-exp-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-exp-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: white;
+    }
+
+    .sidebar-exp-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 2px;
+    }
+
+    .sidebar-exp-subtitle {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .sidebar-exp-arrow {
+      width: 18px;
+      height: 18px;
+      stroke: var(--primary-400);
+      margin-left: auto;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .sidebar-expectations-cta:hover .sidebar-exp-arrow {
+      transform: translateX(4px);
+    }
+
     /* Responsive */
     @media (max-width: 968px) {
       .event-hero-layout {
@@ -1163,6 +1297,27 @@
         `;
       }
 
+      // Expectations CTA card — links to respond.html
+      const respondUrl = 'respond.html?event=' + encodeURIComponent(toSlug(event.title));
+      mainHtml += `
+        <div class="event-section">
+          <a href="${respondUrl}" class="exp-cta-card" id="expCtaCard">
+            <div class="exp-cta-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <div class="exp-cta-content">
+              <h3>What are your expectations?</h3>
+              <p id="expCtaSubtext">Share what you hope to learn or discuss at this event</p>
+            </div>
+            <div class="exp-cta-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        </div>
+      `;
+
       // Target Audience
       if (event.targetAudience) {
         mainHtml += `
@@ -1264,6 +1419,22 @@
             </a>
           </div>
         </div>
+      `;
+
+      // Expectations CTA in sidebar — links to respond.html
+      sidebarHtml += `
+        <a href="${respondUrl}" class="sidebar-expectations-cta" id="sidebarExpCta" style="text-decoration:none;">
+          <div class="sidebar-exp-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="sidebar-exp-title">Share Your Expectations</div>
+            <div class="sidebar-exp-subtitle" id="sidebarExpCount">Be the first to share!</div>
+          </div>
+          <svg class="sidebar-exp-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       `;
 
       // Render layout
@@ -1378,6 +1549,78 @@
       if (contentSection) contentSection.style.display = 'none';
       document.getElementById('eventNotFound').style.display = 'block';
     }
+  </script>
+
+  <!-- Firebase SDK (compat mode for simplicity) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script>
+    // ============================================
+    // FIREBASE CONFIG — Replace with your values
+    // ============================================
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyZwl08LB5BkYQUckJLmjh9ErGehZxJ8o",
+      authDomain: "dd-consulting-llc.firebaseapp.com",
+      projectId: "dd-consulting-llc",
+      storageBucket: "dd-consulting-llc.firebasestorage.app",
+      messagingSenderId: "251995082210",
+      appId: "1:251995082210:web:e797d8e59a92f337407dbb"
+    };
+
+    // Check if Firebase is configured
+    const firebaseReady = firebaseConfig.apiKey !== "YOUR_API_KEY";
+
+    if (firebaseReady) {
+      firebase.initializeApp(firebaseConfig);
+    }
+
+    // ============================================
+    // EXPECTATIONS COUNT — Updates CTA card & sidebar
+    // ============================================
+    (function() {
+      if (!eventSlug || !firebaseReady) return;
+
+      const eventId = decodeURIComponent(eventSlug).trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      const db = firebase.firestore();
+
+      // Wait for CTA elements to render, then fetch count
+      const observer = new MutationObserver(() => {
+        if (document.getElementById('expCtaSubtext')) {
+          observer.disconnect();
+          fetchCount();
+        }
+      });
+
+      const eventContent = document.getElementById('eventContent');
+      if (eventContent) {
+        observer.observe(eventContent, { childList: true, subtree: true });
+      }
+
+      function fetchCount() {
+        db.collection('event_expectations')
+          .where('eventId', '==', eventId)
+          .onSnapshot(snapshot => {
+            const count = snapshot.size;
+            updateCount(count);
+          }, error => {
+            console.error('Firestore count error:', error);
+          });
+      }
+
+      function updateCount(count) {
+        const ctaSubtext = document.getElementById('expCtaSubtext');
+        const sidebarCount = document.getElementById('sidebarExpCount');
+
+        if (count === 0) {
+          if (ctaSubtext) ctaSubtext.textContent = 'Be the first to share what you hope to learn or discuss';
+          if (sidebarCount) sidebarCount.textContent = 'Be the first to share!';
+        } else {
+          const label = `${count} ${count === 1 ? 'person' : 'people'} shared expectations — join the conversation`;
+          if (ctaSubtext) ctaSubtext.textContent = label;
+          if (sidebarCount) sidebarCount.textContent = label;
+        }
+      }
+    })();
   </script>
 
 </body>
