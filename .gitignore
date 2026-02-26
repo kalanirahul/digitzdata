@@ -11,3 +11,8 @@ Thumbs.db
 
 # Local development
 *.log
+
+# Sensitive files
+IMPLEMENTATION-PLAN-*.md
+.env
+.env.*

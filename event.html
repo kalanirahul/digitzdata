@@ -1033,10 +1033,10 @@
           <img src="DD Logo.png" alt="DD Consulting" class="footer-logo-img">
           <p>A global advisory firm delivering solutions across actuarial science, accounting, ESG, and digital transformation.</p>
           <div class="social-links">
-            <a href="https://ae.linkedin.com/company/dd-consulting-llc" target="_blank" class="social-link" aria-label="LinkedIn">
+            <a href="https://ae.linkedin.com/company/dd-consulting-llc" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </a>
-            <a href="https://www.instagram.com/consultantsuae/" target="_blank" class="social-link" aria-label="Instagram">
+            <a href="https://www.instagram.com/consultantsuae/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             </a>
           </div>
@@ -1054,7 +1054,7 @@
         <div class="footer-column">
           <h4>Products</h4>
           <div class="footer-links">
-            <a href="https://www.reserium.io" target="_blank" class="footer-link">Reserium</a>
+            <a href="https://www.reserium.io" target="_blank" rel="noopener noreferrer" class="footer-link">Reserium</a>
             <a href="products.html" class="footer-link">GLM Pricing Tool</a>
             <a href="partners.html#ai-solutions" class="footer-link">AI Solutions</a>
             <a href="products.html" class="footer-link">Motor Pricing Insights</a>
@@ -1082,6 +1082,7 @@
   </footer>
 
   <script src="js/data-loader.js"></script>
+  <script src="js/security-utils.js"></script>
   <script>
     // Mobile Navigation
     const menuToggle = document.getElementById('menuToggle');
@@ -1180,8 +1181,8 @@
       document.getElementById('eventTitle').textContent = event.title;
 
       document.getElementById('eventTypeBadge').innerHTML = `
-        <span class="event-type-badge">${eventType}</span>
-        <span class="event-status-badge ${status}" style="margin-left: 8px;">${status}</span>
+        <span class="event-type-badge">${escapeHtml(eventType)}</span>
+        <span class="event-status-badge ${escapeHtml(status)}" style="margin-left: 8px;">${escapeHtml(status)}</span>
       `;
 
       const heroMeta = [];
@@ -1195,7 +1196,7 @@
         heroMeta.push(`
           <span class="event-hero-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            ${event.time}
+            ${escapeHtml(event.time)}
           </span>
         `);
       }
@@ -1203,7 +1204,7 @@
         heroMeta.push(`
           <span class="event-hero-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            ${event.location}
+            ${escapeHtml(event.location)}
           </span>
         `);
       }
@@ -1218,11 +1219,11 @@
           return photo ? `
             <div class="hero-speaker">
               <div class="hero-speaker-photo">
-                <img src="${photo}" alt="${s.name}">
+                <img src="${sanitizeUrl(photo)}" alt="${escapeHtml(s.name)}">
               </div>
               <div class="hero-speaker-info">
-                <span class="hero-speaker-name">${s.name}</span>
-                <span class="hero-speaker-role">${s.role}</span>
+                <span class="hero-speaker-name">${escapeHtml(s.name)}</span>
+                <span class="hero-speaker-role">${escapeHtml(s.role)}</span>
               </div>
             </div>
           ` : '';
@@ -1238,7 +1239,7 @@
           <div class="event-section">
             <h2 class="event-section-title">Overview</h2>
             <div class="event-overview">
-              ${overview.split('\n').filter(Boolean).map(p => `<p>${p}</p>`).join('')}
+              ${overview.split('\n').filter(Boolean).map(p => `<p>${escapeHtml(p)}</p>`).join('')}
             </div>
           </div>
         `;
@@ -1253,14 +1254,14 @@
               <div class="agenda-part">
                 <div class="agenda-part-header">
                   <span class="agenda-part-number">${i + 1}</span>
-                  <span class="agenda-part-title">${part.title}</span>
+                  <span class="agenda-part-title">${escapeHtml(part.title)}</span>
                 </div>
                 ${part.bullets.length > 0 ? `
                   <ul class="agenda-part-bullets">
                     ${part.bullets.map(b => `
                       <li class="agenda-part-bullet">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-                        <span>${b}</span>
+                        <span>${escapeHtml(b)}</span>
                       </li>
                     `).join('')}
                   </ul>
@@ -1274,7 +1275,7 @@
           <div class="event-section">
             <h2 class="event-section-title">Agenda</h2>
             <ol class="agenda-list">
-              ${agenda.map(item => `<li class="agenda-item"><span>${item}</span></li>`).join('')}
+              ${agenda.map(item => `<li class="agenda-item"><span>${escapeHtml(item)}</span></li>`).join('')}
             </ol>
           </div>
         `;
@@ -1289,7 +1290,7 @@
               ${takeaways.map(item => `
                 <div class="takeaway-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
-                  <span>${item}</span>
+                  <span>${escapeHtml(item)}</span>
                 </div>
               `).join('')}
             </div>
@@ -1323,7 +1324,7 @@
         mainHtml += `
           <div class="event-section">
             <h2 class="event-section-title">Who Should Attend</h2>
-            <p class="event-text-block">${event.targetAudience}</p>
+            <p class="event-text-block">${escapeHtml(event.targetAudience)}</p>
           </div>
         `;
       }
@@ -1333,7 +1334,7 @@
         mainHtml += `
           <div class="event-section">
             <h2 class="event-section-title">Prerequisites</h2>
-            <p class="event-text-block">${event.prerequisites}</p>
+            <p class="event-text-block">${escapeHtml(event.prerequisites)}</p>
           </div>
         `;
       }
@@ -1347,8 +1348,8 @@
               ${speakers.map(s => `
                 <div class="event-speaker-card">
                   <div class="event-speaker-avatar">${speakerAvatarHtml(s.name)}</div>
-                  <div class="event-speaker-name">${s.name}</div>
-                  <div class="event-speaker-role">${s.role}</div>
+                  <div class="event-speaker-name">${escapeHtml(s.name)}</div>
+                  <div class="event-speaker-role">${escapeHtml(s.role)}</div>
                 </div>
               `).join('')}
             </div>
@@ -1376,7 +1377,7 @@
               </div>
               <div>
                 <div class="event-detail-label">${row.label}</div>
-                <div class="event-detail-value">${row.value}</div>
+                <div class="event-detail-value">${escapeHtml(row.value)}</div>
               </div>
             </div>
           `).join('')}
@@ -1384,10 +1385,10 @@
           <div class="event-cta-group">
             ${isPast
               ? (event.recordingLink
-                ? `<a href="${event.recordingLink}" target="_blank" class="btn btn-primary">Watch Recording</a>`
+                ? `<a href="${sanitizeUrl(event.recordingLink)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Watch Recording</a>`
                 : `<a href="contact.html" class="btn btn-primary">Request Recording</a>`)
               : (event.registerLink
-                ? `<a href="${event.registerLink}" target="_blank" class="btn btn-primary">Register Now</a>`
+                ? `<a href="${sanitizeUrl(event.registerLink)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Register Now</a>`
                 : `<a href="contact.html" class="btn btn-primary">Contact Us to Register</a>`)
             }
             <a href="webinars.html" class="btn btn-outline">Back to All Events</a>
@@ -1399,7 +1400,7 @@
       if (tags.length > 0) {
         sidebarHtml += `
           <div class="event-tags">
-            ${tags.map(tag => `<span class="event-tag">${tag}</span>`).join('')}
+            ${tags.map(tag => `<span class="event-tag">${escapeHtml(tag)}</span>`).join('')}
           </div>
         `;
       }
@@ -1451,7 +1452,7 @@
               ? 'Contact us for the recording or to learn about upcoming sessions on similar topics.'
               : 'Secure your spot and gain valuable insights from our industry experts.'
             }</p>
-            <a href="${isPast ? 'contact.html' : (event.registerLink || 'contact.html')}" ${!isPast && event.registerLink ? 'target="_blank"' : ''} class="btn">
+            <a href="${isPast ? 'contact.html' : (sanitizeUrl(event.registerLink) || 'contact.html')}" ${!isPast && event.registerLink ? 'target="_blank" rel="noopener noreferrer"' : ''} class="btn">
               ${isPast ? 'Contact Us' : 'Register Now'}
             </a>
           </div>
@@ -1555,34 +1556,15 @@
   <!-- Firebase SDK (compat mode for simplicity) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
   <script>
-    // ============================================
-    // FIREBASE CONFIG — Replace with your values
-    // ============================================
-    const firebaseConfig = {
-      apiKey: "AIzaSyDyZwl08LB5BkYQUckJLmjh9ErGehZxJ8o",
-      authDomain: "dd-consulting-llc.firebaseapp.com",
-      projectId: "dd-consulting-llc",
-      storageBucket: "dd-consulting-llc.firebasestorage.app",
-      messagingSenderId: "251995082210",
-      appId: "1:251995082210:web:e797d8e59a92f337407dbb"
-    };
-
-    // Check if Firebase is configured
-    const firebaseReady = firebaseConfig.apiKey !== "YOUR_API_KEY";
-
-    if (firebaseReady) {
-      firebase.initializeApp(firebaseConfig);
-    }
-
     // ============================================
     // EXPECTATIONS COUNT — Updates CTA card & sidebar
     // ============================================
     (function() {
-      if (!eventSlug || !firebaseReady) return;
+      if (!eventSlug) return;
 
       const eventId = decodeURIComponent(eventSlug).trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-      const db = firebase.firestore();
 
       // Wait for CTA elements to render, then fetch count
       const observer = new MutationObserver(() => {

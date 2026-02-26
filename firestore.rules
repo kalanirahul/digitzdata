@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Event expectations: public read, validated create, no update/delete
+    match /event_expectations/{docId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['eventId', 'message', 'createdAt'])
+                    && request.resource.data.eventId is string
+                    && request.resource.data.eventId.size() > 0
+                    && request.resource.data.eventId.size() < 200
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() > 0
+                    && request.resource.data.message.size() < 2000
+                    && (!('name' in request.resource.data) || (request.resource.data.name is string && request.resource.data.name.size() < 200))
+                    && (!('position' in request.resource.data) || (request.resource.data.position is string && request.resource.data.position.size() < 200))
+                    && (!('company' in request.resource.data) || (request.resource.data.company is string && request.resource.data.company.size() < 200));
+      allow update, delete: if false;
+    }
+
+    // Block all other collections by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

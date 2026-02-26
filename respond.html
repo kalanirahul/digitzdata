@@ -985,22 +985,14 @@
   </div>
 
   <script src="js/data-loader.js"></script>
+  <script src="js/security-utils.js"></script>
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
 
   <script>
-    firebase.initializeApp({
-      apiKey: "AIzaSyDyZwl08LB5BkYQUckJLmjh9ErGehZxJ8o",
-      authDomain: "dd-consulting-llc.firebaseapp.com",
-      projectId: "dd-consulting-llc",
-      storageBucket: "dd-consulting-llc.firebasestorage.app",
-      messagingSenderId: "251995082210",
-      appId: "1:251995082210:web:e797d8e59a92f337407dbb"
-    });
-
-    const db = firebase.firestore();
 
     // Speaker photos
     const speakerPhotos = {
@@ -1190,15 +1182,15 @@
             </div>
             <form id="respondForm">
               <div class="respond-textarea-wrap">
-                <textarea id="rMessage" class="respond-textarea" placeholder="What topics interest you most? What insights are you hoping to gain? What challenges would you like addressed?" required rows="4"></textarea>
+                <textarea id="rMessage" class="respond-textarea" placeholder="What topics interest you most? What insights are you hoping to gain? What challenges would you like addressed?" required rows="4" maxlength="2000"></textarea>
                 <button type="submit" class="respond-send-btn" id="rSubmitBtn" title="Submit">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                 </button>
               </div>
               <div class="respond-identity-row">
-                <input type="text" id="rName" class="respond-input" placeholder="Your name" required>
-                <input type="text" id="rPosition" class="respond-input" placeholder="Position">
-                <input type="text" id="rCompany" class="respond-input" placeholder="Company">
+                <input type="text" id="rName" class="respond-input" placeholder="Your name" required maxlength="200">
+                <input type="text" id="rPosition" class="respond-input" placeholder="Position" maxlength="200">
+                <input type="text" id="rCompany" class="respond-input" placeholder="Company" maxlength="200">
                 <label class="respond-anon-toggle">
                   <input type="checkbox" id="rAnonymous">
                   <span>Anonymous</span>
@@ -1279,6 +1271,11 @@
             }
           });
 
+        // Rate limiting: max 3 submissions per 5 minutes
+        let submitTimestamps = [];
+        const RATE_LIMIT_MAX = 3;
+        const RATE_LIMIT_WINDOW = 5 * 60 * 1000;
+
         // Form submission
         document.getElementById('respondForm').addEventListener('submit', async (e) => {
           e.preventDefault();
@@ -1291,6 +1288,17 @@
           const btn = document.getElementById('rSubmitBtn');
 
           if (!message) return;
+
+          // Rate limit check
+          const now = Date.now();
+          submitTimestamps = submitTimestamps.filter(t => now - t < RATE_LIMIT_WINDOW);
+          if (submitTimestamps.length >= RATE_LIMIT_MAX) {
+            msgEl.textContent = 'Too many submissions. Please wait a few minutes.';
+            msgEl.className = 'respond-form-message error';
+            msgEl.style.display = 'block';
+            return;
+          }
+          submitTimestamps.push(now);
 
           btn.disabled = true;
           msgEl.className = 'respond-form-message';
