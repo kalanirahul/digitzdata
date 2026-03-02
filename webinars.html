@@ -1102,8 +1102,8 @@
     function renderWebinars(webinars) {
       const now = new Date();
       now.setHours(0, 0, 0, 0);
-      const upcoming = webinars.filter(w => new Date(w.date + 'T23:59:59') >= now && w.status !== 'cancelled');
-      const past = webinars.filter(w => new Date(w.date + 'T23:59:59') < now || w.status === 'recorded');
+      const upcoming = webinars.filter(w => new Date(w.date) >= now && w.status !== 'cancelled');
+      const past = webinars.filter(w => new Date(w.date) < now || w.status === 'recorded');
 
       // Render compact ticker at top
       renderEventsTicker(upcoming);

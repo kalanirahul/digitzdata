@@ -1146,7 +1146,7 @@
         const now = new Date();
         now.setHours(0, 0, 0, 0);
         const related = webinars
-          .filter(w => w.title !== event.title && new Date(w.date + 'T23:59:59') >= now && w.status !== 'cancelled')
+          .filter(w => w.title !== event.title && new Date(w.date) >= now && w.status !== 'cancelled')
           .slice(0, 2);
         renderRelatedEvents(related);
 
@@ -1160,7 +1160,7 @@
       const date = new Date(event.date);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      const isPast = new Date(event.date + 'T23:59:59') < today;
+      const isPast = date < today;
       const status = isPast ? 'recorded' : (event.status || 'upcoming');
       const eventType = event.eventType || 'Webinar';
       const speakers = parseSpeakers(event.speakers);
